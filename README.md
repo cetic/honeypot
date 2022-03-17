@@ -2,7 +2,7 @@
 
 ## Concepts
 
-* honeyfarm, honeynet, honey-patching
+* honeyfarm, honeynet, honey-patching, honey-trapping
 
 ## References
 
