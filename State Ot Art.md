@@ -2,20 +2,21 @@
 ## Definition
 The Honeypot is by vocation, a more or less artificial information system whose main purpose is to be probed, attacked and possibly compromised. When two or more honeypots are deployed in the same environment, they form a honeynet [^2]. Honeypots are used to lure attackers into believing they have access to real systems. They can be integrated with intrusion detection systems (IDS) and firewalls to form an intrusion protection system (IPS) [^3]. This is created to capture and use all information on Hackers to study their methods, their motivations and the attack techniques they use to break into or corrupt a system. The goal is to develop ways to improve system security and prevent attacks in the future. 
 
-![Basic Honeypot Exemple](/IMAGES/Basic-honeynet-architecture.png)[^3]
+![Basic Honeypot Exemple](/IMAGES/honeypot-basic-diagram.png)
 
 ## Characteristics of honeypots 
 The honeypots can be classied by means of different orthogonal features [^1]. 
 
+![Honeypot Characteristics](/IMAGES/Honeypot-Characteristics.drawio)
+
 ### Interaction Level
 The interaction level of the honeypot indicates to what extent its functionality is exposed. Two values are used to define it :
-* Low-interaction : honeypot have low level of realism. The interaction between the Hacker and the system is short and limited. It is generally not a system per se, but rather an emulation of operating systems and services. This type of Honeypot  can simulate only specific systems services and uses basic techniques like identifying port scans, generating attack signatures, analyzing trends and collecting malware informations. 
-* A High-interaction : honeypot provide the most realistic environment for the attackers because it use real services running on real operating systems. 
-
+    * Low-interaction : honeypot have low level of realism. The interaction between the Hacker and the system is short and limited. It is generally not a system per se, but rather an emulation of operating systems and services. This type of Honeypot  can simulate only specific systems services and uses basic techniques like identifying port scans [^6], generating attack signatures, analyzing trends and collecting malware informations. 
+    * High-interaction : honeypot provide the most realistic environment for the attackers because it use real services running on real operating systems. 
 
 ### Ressource level
 The resource level used by the honeypot is determined by the replication realism of the system. There are three possibilities: 
-* Real / Physique : is a replication of a target system. This solution is expensive.
+* Real / Physique : is a replication of a target system.
 * Virtual : use virtualization technology to reproduce a system. This solution is low-cost.
 * Hybrid : include a mixture of real and virtual device. This solution is coste effective
 
@@ -48,7 +49,7 @@ This characteristic does not directly concern the technical aspects, but rather 
 * Event : an event has occurred -> Status change .
 * Attacks : collects activities threatening the security policy.
 * Intrusions : collects policy-threatening activities that lead to a security breach.
-* None: no data collection.
+* None : no data collection.
 
 ### Detection
 Several mechanisms can be used by the honeypot for the analysis: 
@@ -59,6 +60,7 @@ Several mechanisms can be used by the honeypot for the analysis:
 This characteristic is used to define in which context the honeypot is used and what is the purpose of its implementation :
 * Research : is used to lure attackers and study their behaviours and the tools they use to develop better protection against these attacks.
 * Production : is used to defend and prevent attack on real systems and to protect it.
+
 
 
 ## Honeypot vs IDS vs IPS
@@ -103,7 +105,6 @@ TODO
 The capabilities of a single honeypot are limited to its characteristics. Today, many honeypot systems focus on combining different types of honeypot to achieve an optimized solution. 
 A honeynet is an extension of the honeypot concept respecting a certain topology. 
 
-### Features
 In his article, Wenjun's Fan [^2] proposes a honey network taxonomy that facilitates their classification and study. 
 It is composed of 3 main features:
 Data control: Set of measures aimed at reducing the risk that a honeypot will be compromised and used to attack other systems. Outbound attacks must be controlled to protect non-honeypot systems
@@ -152,3 +153,4 @@ Data collection: Means necessary and used to guarantee the safe transfer of data
 * [^3] Franco, J., Aris, A., Canberk, B., & Uluagac, A. S. (2021). A survey of honeypots and honeynets for internet of things, industrial internet of things, and cyber-physical systems. IEEE Communications Surveys & Tutorials, 23(4), 2351-2383. https://ieeexplore.ieee.org/abstract/document/9520645/
 * [^4] Antonioli, Daniele & Agrawal, Anand & Tippenhauer, Nils Ole. (2016). Towards High-Interaction Virtual ICS Honeypots-in-a-Box. 13-22. 10.1145/2994487.2994493. https://dl.acm.org/doi/abs/10.1145/2994487.2994493 
 * [^5] Mairh, Abhishek and Barik, Debabrat and Verma, Kanchan and Jena, Debasish. (2011). Honeypot in Network Security: A Survey. https://dl.acm.org/doi/10.1145/1947940.1948065
+* [^6] Ahn, Seonggwan, Thummin Lee, and Keecheon Kim. "A study on improving security of ICS through honeypot and ARP spoofing." 2019 International Conference on Information and Communication Technology Convergence (ICTC). IEEE, https://ieeexplore.ieee.org/abstract/document/8939925/
