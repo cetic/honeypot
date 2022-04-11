@@ -6,31 +6,35 @@ The Honeypot is by vocation, a more or less artificial information system whose 
 
 ## Characteristics of honeypots 
 The honeypots can be classied by means of different orthogonal features [^1]. 
+In order to represent and understand the different characteristics of honeypots, a concrete example is used throughout this section. The example honeypot represents a used water central processing unit.
 
 ![Honeypot Characteristics](/IMAGES/Honeypot-Characteristics.drawio)
 
 ### Interaction Level
-The interaction level of the honeypot indicates to what extent its functionality is exposed. Two values are used to define it :
-    * Low-interaction : honeypot have low level of realism. The interaction between the Hacker and the system is short and limited. It is generally not a system per se, but rather an emulation of operating systems and services. This type of Honeypot  can simulate only specific systems services and uses basic techniques like identifying port scans [^6], generating attack signatures, analyzing trends and collecting malware informations. 
-    * High-interaction : honeypot provide the most realistic environment for the attackers because it use real services running on real operating systems. 
+The interaction level of the honeypot indicates to what extent its functionality is exposed. Two values are used to define it :  
+* Low-interaction : honeypot have low level of realism. The interaction between the Hacker and the system is short and limited. It is generally not a system per se, but rather an emulation of operating systems and services. This type of Honeypot  can simulate only specific systems services and uses basic techniques like identifying port scans [^6], generating attack signatures, analyzing trends and collecting malware informations. 
+* High-interaction : honeypot provide the most realistic environment for the attackers because it use real services running on real operating systems.  
+In the case of the example, the low-interaction honeypot presents only a few possibilities of interaction, such as for example access to PLCs capable, in this case, only of giving status information. While the high-interaction, will allow to be able to interact with these PLCs and that the modifications made have an immediate impact on one of the other components of the honeypots, such as the monitoring and alert system.
 
 ### Ressource level
 The resource level used by the honeypot is determined by the replication realism of the system. There are three possibilities: 
 * Real / Physique : is a replication of a target system.
 * Virtual : use virtualization technology to reproduce a system. This solution is low-cost.
 * Hybrid : include a mixture of real and virtual device. This solution is coste effective
+To better understand, let's take the example of the central. "Physical" would be a carbon copy of a processing central in production. Requiring an identical infrastructure at all levels. If the real central uses 20 PLCs, the honeypot will use 20 real PLCs. The virtual honeypot is a virtual copy of the central. Hosted on a machine capable of virtualizing the layers and services of each component. Virtualization makes it possible to create the 20 PLCs in such a way that they perfectly imitate the behavior of the real components of the central. In the case of hybrid, one could quite imagine that the network infrastructure is completely virtualized, but that the PLCs are real physical components.
 
 ### Communication interfaces
 The communication interface is the characteristic that defines how the honeypot will be reached and through which interface one will be able to interact with it: 
 * Network interface: the honeypot communicates directly through a network interface 
 * Non-network hardware interface: the honeypot interfaces with hardware interfaces other than networks (PLC, USB, etc.) 
 * API : the honeypot communicates via a software API 
-(Example: Sparta - GitLab CI - iptable -> API? )
+There are a multitude of possibilities for implementing honeypots in a wastewater treatment plant. If it is decided to add a honeypot at the network level (a server, a switch, etc.) in a real central, and only at this location, the honeypot only has a "Network interface" as a communication interface. , because it is via this interface that hackers will communicate with. If it is a PLC or a sensor using the RS232 protocol, etc. then the communication interface of the honeypot is a "Non-network hardware interface". Finally, suppose that the honeypot is an API that is used by a real logging server and that it is allowed to return fictitious information, then we are in the case of an "API" interface
 
 ### Multi-tier architecture 
 Honeypot can behave in 2 different ways when it comes to its interaction: 
 * Server: honeypot acts as a server and passively waits for client requests 
 * Client: honeypot acts as a client and actively initiates requests to servers 
+Let's take the example of a honeypot representing a machine capable of performing orchestration tasks. In the central, 2 possibilities exist, the first is the client honeypot connects to servers in order to retrieve its tasks for the day. It will then execute a series of commands and retrieve information which will be analyzed in order to verify that none of these commands is illegal. The second is the reverse role, namely the honeypot server, which will provide tasks to its clients. It will also collect information that will be analyzed to verify that no client is trying to execute illegal commands and access unauthorized information.
 
 ### Distribution Appearance
 The appearance of the honeypot is that it appears to be, or is, composed of a single system, or if it appears to be, or is composed of several independent systems:
