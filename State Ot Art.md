@@ -2,6 +2,8 @@
 ## Definition
 The Honeypot is by vocation, a more or less artificial information system whose main purpose is to be probed, attacked and possibly compromised. When two or more honeypots are deployed in the same environment, they form a honeynet [^2]. Honeypots are used to lure attackers into believing they have access to real systems. They can be integrated with intrusion detection systems (IDS) and firewalls to form an intrusion protection system (IPS) [^3]. This is created to capture and use all information on Hackers to study their methods, their motivations and the attack techniques they use to break into or corrupt a system. The goal is to develop ways to improve system security and prevent attacks in the future. 
 
+-> Talk about BLUE TEAM ! 
+
 ![Basic Honeypot Exemple](/IMAGES/honeypot-basic-diagram.png)
 
 ## Characteristics of honeypots 
@@ -79,7 +81,6 @@ Several mechanisms can be used by the honeypot for the analysis:
 
 To give a concrete example of a detection mechanism, one can imagine the implementation of a SCADA within the honeypot of the plant. In the case of an "Abuse", the communication network data is processed and compared in real time by the SCADA which will compare it to an attack signature database and detect if there is a match. In the case of an "Anomaly", The honeypot uses an IDS, which filters the packets circulating on the communication networks and is able to identify the anomalies.
 
-
 ### Scalability:
 Scalability determines the ability of a honeypot to evolve. By this we mean its ability to be modified in order to increase the number of decoys and services it offers [^3]:
 * Scalable: can increase the number of services and lures offered
@@ -146,34 +147,22 @@ Data collection: Means necessary and used to guarantee the safe transfer of data
 
 
 ## Type of attacks 
+
 ### Mitre 
-*Definition ? 
-*How Mitre and honeypot are related ?
+MITRE is an American non-profit organization whose objective is to work for the public interest. His fields of intervention are systems engineering, information technology, operational concepts, and business modernization. Their slogan is that they solve problems for a safer world.  
+MITRE has become a reference in terms of sharing information around cybercrime and its 2 essential platforms are MITRE ATT&CK® and MITRE CVE.  
+MITRE ATT&CK® [^8]is an open and freely accessible reference knowledge base, known in the world of computer security, as it provides a list of tactics and techniques used by cybercriminals. It describes the adversary behaviors specific to the different environments (Windows, Linux, Mac, cloud, mobiles, etc.). Organizations tap into this knowledge base to develop offensive and defensive measures to strengthen their security. ATT&CK® can help cyber defense managers better understand attacker behavior and assess risk to a society by classifying attacks. There is even a knowledge base dedicated to Industrial Control Systems, ATT&CK® ICS [^10].    
+
+MITRE CVE [^9] is a public dictionary that records all vulnerabilities and security flaws that have been discovered. CVE identifiers are notably used by IDSs and IPSs.
+
+The use of these 2 sources of information by a honeypot can be interesting insofar as they provide interesting techniques to feed the attacker's killchain. 
+TODO->
+
 *Usage of Mitre (Honeypot dapted to certain threats) ? 
+
 
 ###  Lockheed-Martin Killchain
-*Definition ? 
-*How Mitre and honeypot are related ?
-*Usage of Mitre (Honeypot dapted to certain threats) ? 
-
-### ADT for ROS
-*Definition ? 
-*How Mitre and honeypot are related ?
-*Usage of Mitre (Honeypot dapted to certain threats) ? 
-
-
-(
-* Distributed / Denial of- Service
-* Man-in-the-Middle
-* Phishing
-* Drive-by- Download
-* Password
-* SQL Injection
-* Cross-Site Scripting (XSS)
-* Eavesdropping (/ snooping attacks / spying attacks)
-* Birthday
-* Malware
-)
+*confront MITRE
 
 ## Honeypot solutions referances
 reference in terms of honeypot in the private and open-source market
@@ -185,7 +174,14 @@ reference in terms of honeypot in the private and open-source market
  : +definition of characteristics specific to a use-case
 
 
-## Honeypot and DevSecOps 
+
+
+
+# Honeypot and DevSecOps 
+
+## DevSecOps 
+
+## Criteria for selecting a honeypot
 
 
 
@@ -199,12 +195,14 @@ reference in terms of honeypot in the private and open-source market
 * honey-trapping
 
 ## Glossary 
-* IoT : Internet of Things
-* IIoT : Industrial Internet of Things
-* CPS : Cyber-physical system - Cyber-physical system: Computing environment composed of deeply intertwined physical and software elements. Networks of devices composed of: sensor, actuator, PLC, RTU, IED, Monitoring, ICS, etc.
-* PLC : Programmable Logic Controllers - Programmable digital electronic device for controlling industrial processes by sequential processing. Exemple : Input cards for connecting sensors, push buttons, actuators, indicators, valves, etc. 
-* RTU : Remote Terminal Units - Electronic device controlled by microprocessor which connects the objects of the physical world to a distributed control system or to a SCADA 
-* ICS : Industrial Control Systems is a Control systems and associated instrumentation, which include the devices, systems, networks, and controls used to operate and/or automate industrial processes.  Exemple : Smart Grid and other smart infrastructures : water, gas, building automation, medical devices, smart cars, etc.
+* IoT : Internet of Things  
+* IIoT : Industrial Internet of Things  
+* CPS : Cyber-physical system - Cyber-physical system: Computing environment composed of deeply intertwined physical and software elements. Networks of devices composed of: sensor, actuator, PLC, RTU, IED, Monitoring, ICS, etc.  
+* PLC : Programmable Logic Controllers - Programmable digital electronic device for controlling industrial processes by sequential processing. Exemple : Input cards for connecting sensors, push buttons, actuators, indicators, valves, etc.  
+* RTU : Remote Terminal Units - Electronic device controlled by microprocessor which connects the objects of the physical world to a distributed control system or to a SCADA  
+* ICS : Industrial Control Systems is a Control systems and associated instrumentation, which include the devices, systems, networks, and controls used to operate and/or automate industrial processes.  Exemple : Smart Grid and other smart infrastructures : water, gas, building automation, medical devices, smart cars, etc.  
+* System : Set of elements that make up a pot of honey. A system may consist of several subsystems determining the intrinsic characteristics of the honyepot.
+* CVE : Common Vulnerabilities and Exposures
 
 ## References
 * [^1] Seifert, C., Welch, I., & Komisarczuk, P. (2006). Taxonomy of honeypots. http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.61.5339
@@ -214,3 +212,6 @@ reference in terms of honeypot in the private and open-source market
 * [^5] Mairh, Abhishek and Barik, Debabrat and Verma, Kanchan and Jena, Debasish. (2011). Honeypot in Network Security: A Survey. https://dl.acm.org/doi/10.1145/1947940.1948065
 * [^6] Ahn, Seonggwan, Thummin Lee, and Keecheon Kim. "A study on improving security of ICS through honeypot and ARP spoofing." (2019) International Conference on Information and Communication Technology Convergence (ICTC). IEEE, https://ieeexplore.ieee.org/abstract/document/8939925/
 * [^7] Mohammadzadeh, H., Mansoori, M., & Honarbakhsh, R. "Taxonomy of Hybrid Honeypots". (2011). https://www.semanticscholar.org/paper/Taxonomy-of-Hybrid-Honeypots-Mohammadzadeh-Mansoori/711bf1e19078df842f6388869388e9c128cf1024
+[^8] MITRE ATT&CK® https://attack.mitre.org/
+[^9] MITRE ATT&CK® for ICS https://collaborate.mitre.org/attackics/index.php/Main_Page
+[^10] MITRE CVE (Common Vulnerabilities and Exposures) https://cve.mitre.org/

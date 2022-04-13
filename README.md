@@ -1,4 +1,6 @@
-# Integration of a honeypot solution in a DevSecOps mechanism oriented Edge Computing -> Review
+# TITLE :
+* "Integration of a honeypot solution into a DevSecOps pipeline in an Edge computing context"
+* "augment DSO methods for the edge with honeypots"
 
 ## MindMap
 https://mm.tt/map/2220364498?t=J2g6SrzzeC
