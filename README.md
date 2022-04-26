@@ -60,3 +60,4 @@ https://mm.tt/map/2220364498?t=J2g6SrzzeC
 * Frederico Araujo, Kevin W. Hamlen. [Embedded Honeypotting](https://link.springer.com/chapter/10.1007/978-3-319-32699-3_9). Cyber Deception: Building the Scientific Foundation, pp. 203--233, Springer International Publishing, 2016. (See the timeline in particular and honey-patching)
 * https://www.projecthoneypot.org/faq.php
 * Vanderavero, Nicolas & Brouckaert, Xavier & Bonaventure, Olivier & Le Charlier, Baudouin. (2008). [The HoneyTank: A scalable approach to collect malicious internet traffic](https://www.researchgate.net/publication/220592932_The_HoneyTank_A_scalable_approach_to_collect_malicious_internet_traffic). IJCIS. 4. 185-205. 10.1504/IJCIS.2008.016100. 
+
