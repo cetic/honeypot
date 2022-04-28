@@ -27,6 +27,13 @@ A few clues allow a hacker to identify that he is communicating with a honeypot 
 The honeypots can be classied by means of different orthogonal features [^1]. 
 In order to represent and understand the different characteristics of honeypots, a concrete example is used throughout this section. The example honeypot represents a wastewater treatment plant.
 
+Here is a diagram:
+
+![Basic Honeypot Exemple](/IMAGES/wastewater-treatment-plant-honeypot.png)
+
+This example honeypot represents the infrastructure of the wastewater treatment plant [^12]. It is made up of a firewall acting as a gateway from the outside. Within the network, we find the elements usually constituting this type of industry. There is a SCADA, the control and data acquisition system, but also a history server, allowing this data to be stored over time. These systems are connected directly to PLCs. PLCs make it possible, on the one hand, to retrieve information from the various sensors (water temperature, flow rates, etc.), and on the other hand, to send orders and commands to the various actuators (valves, by -pass, ... ). While some of these components (sensors and actuators) are directly connected to a PLC, others may be located in relatively distant geographical positions. RIOs (Remote Input/Output) are then used to make the link between the PLC and the components. Finally, all the components are consulted and ordered by the engineers and technicians from the man-machine interface. This interface is comparable to a traditional workstation.
+
+
 (TODO--> ADD Schem of wastewater treatment plant)
 
 ### Interaction Level
@@ -35,7 +42,7 @@ The interaction level of the honeypot indicates to what extent its functionality
 * High-interaction : honeypot provide the most realistic environment for the attackers because it use a variety of real services running on real operating systems. It imposes few restrictions inside the system, encouraging attackers to interact with it. High-interaction honeypots provide are often able to capture detailed information, making them better for monitoring more experienced hackers, as they look realistic and are likely to deceive them. This feature carries risks since it allows the attacker to point to root access, which constitutes a threat of hijacking.
 * Hybride : A pot of honey offering a mix between low and high ineraction.
 
-In the case of the example, the low-interaction honeypot presents only a few possibilities of interaction, such as for example access to PLCs capable, in this case, only of giving status information. While the high-interaction, will allow to be able to interact with these PLCs and that the modifications made have an immediate impact on one of the other components of the honeypots, such as the monitoring and alert system. In the case of a hybrid, one could imagine a mixture between certain PLCs supposed to interact and others providing only a certain amount of defined information.
+In the case of the example, the low-interaction honeypot presents only a few possibilities of interaction, such as for example access to PLCs capable, in this case, only of giving status information. While the high-interaction, will allow to be able to interact with these PLCs and that the modifications made have an immediate impact on one of the other components of the honeypots, such as the SCADA. In the case of a hybrid, one could imagine a mixture between certain PLCs supposed to interact and others providing only a certain amount of defined information.
 
 ### Ressource level
 The resource level used by the honeypot is determined by the replication realism of the system. There are three possibilities: 
@@ -160,8 +167,7 @@ Data capture: Its purpose is to capture and record and collect the activities of
 * The traffic analysis layer, which checks packets and their payloads as they enter and leave the honeynet.
 * The layer related to activity on the system (system calls, modified files, attacker's keystroke, etc).
 
-Data collection: Means necessary and used to guarantee the safe transfer of data collected by honeypots to a centralized point 
-
+Data collection: Means necessary and used to guarantee the safe transfer of data collected by honeypots to a centralized point.
 
 ## Type of attacks 
 
@@ -258,14 +264,22 @@ https://github.com/telekom-security/tpotce
 * honey-trapping
 
 ## Glossary 
-* IoT : Internet of Things  
-* IIoT : Industrial Internet of Things  
+* IoT : Internet of Things.
+* IIoT : Industrial Internet of Things.
 * CPS : Cyber-physical system - Cyber-physical system: Computing environment composed of deeply intertwined physical and software elements. Networks of devices composed of: sensor, actuator, PLC, RTU, IED, Monitoring, ICS, etc.  
-* PLC : Programmable Logic Controllers - Programmable digital electronic device for controlling industrial processes by sequential processing. Exemple : Input cards for connecting sensors, push buttons, actuators, indicators, valves, etc.  
-* RTU : Remote Terminal Units - Electronic device controlled by microprocessor which connects the objects of the physical world to a distributed control system or to a SCADA  
+* RTU : Remote Terminal Units - Electronic device controlled by microprocessor which connects the objects of the physical world to a distributed control system or to a SCADA  .
 * ICS : Industrial Control Systems is a Control systems and associated instrumentation, which include the devices, systems, networks, and controls used to operate and/or automate industrial processes.  Exemple : Smart Grid and other smart infrastructures : water, gas, building automation, medical devices, smart cars, etc.  
 * System : Set of elements that make up a pot of honey. A system may consist of several subsystems determining the intrinsic characteristics of the honyepot.
-* CVE : Common Vulnerabilities and Exposures
+* CVE : Common Vulnerabilities and Exposures.
+* SCADA : For "Supervisory Control and Data Acquisition". Industrial supervision system that processes a large number of measurements in real time and remotely controls installations.
+* Historian server: Data archiving system designed to collect, store, and retrieve time-based information.
+* PLC : Programmable Logic Controllers - Programmable digital electronic device for controlling industrial processes by sequential processing. Exemple : Input cards for connecting sensors, push buttons, actuators, indicators, valves, etc.  
+* Remote Input/Output (RIO) : Remote I/O device for sending or receiving I/O signs from a PLC. (Also call "Distributed Input/Output").
+* Sensor : Device for measuring the state of a system and transmitting it to a data acquisition system.
+* Actuator : Device for modifying the state of a system.
+* Human Machine Interface (HMI) : Means and tools implemented so that a human can control and communicate with a machine.
+
+
 
 ## References
 * [^1] Seifert, C., Welch, I., & Komisarczuk, P. (2006). Taxonomy of honeypots. http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.61.5339
@@ -279,3 +293,4 @@ https://github.com/telekom-security/tpotce
 [^9] MITRE ATT&CK® for ICS https://collaborate.mitre.org/attackics/index.php/Main_Page
 [^10] MITRE CVE (Common Vulnerabilities and Exposures) https://cve.mitre.org/
 [^11] Ben Lutkevich. (2021). "How to build a honeypot to increase network security"https://www.techtarget.com/searchsecurity/definition/honey-pot
+[^12] Daniele Antonioli, Anand Agrawal, and Nils Ole Tippenhauer. 2016. Towards High-Interaction Virtual ICS Honeypots-in-a-Box. In Proceedings of the 2nd ACM Workshop on Cyber-Physical Systems Security and Privacy (CPS-SPC '16). Association for Computing Machinery, New York, NY, USA, 13–22. DOI:https://doi.org/10.1145/2994487.2994493
