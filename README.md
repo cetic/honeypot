@@ -1,4 +1,48 @@
-# honeypot
+# TITLE :
+* "Integration of a honeypot solution into a DevSecOps pipeline in an Edge computing context"
+* "augment DSO methods for the edge with honeypots"
+
+## MindMap
+https://mm.tt/map/2220364498?t=J2g6SrzzeC
+
+## Structure
+* Introduction
+ * Object definition
+ * Putting the problem into context 
+ * Highlighting the working method / tools / sources
+ * Labor flow 
+* State of the art review (30%)
+ * Global vision of the research topic 
+ * Synthesis of what is happening / what exists around this subject of study 
+ * Justify the problem by demonstrating the relevance and interest in view of the current situation 
+ * Discuss the different approaches related to the theme 
+ * Overall scheme 
+* Développement de la recherche (70%)
+ * Research question (hypothesis) 
+ * Methodology
+ * Résults
+ * Discussion
+* Conclusion
+ * Summary of the results (which confirms or not the hypothesis and the research question) 
+ * Search limit? 
+ * Open perspective? / Possible continuation 
+
+ ## Methodology 
+ * Taxonomy honeypots
+  * Definition of criteria for honeypot ranking 
+  * Studies of existing solutions 
+* DevSecOps
+ * Explanations of the concepts -> DevOps + Sec 
+ * Integrations of a protection tool / Detection ( /!\!= IDS) 
+ * Choice of honeypot solutions conducive to the integration of a DevSecOps mechanism -> Use Case
+* Edge Computing 
+ * Link with IoT / IIoT 
+ * Link to DevSecOps 
+ * Link with honeypots 
+* Use Case
+ * Definition of an interesting use case to test the solution 
+ * Implementation 
+ * Outcome studies 
 
 ## Concepts
 
@@ -16,3 +60,4 @@
 * Frederico Araujo, Kevin W. Hamlen. [Embedded Honeypotting](https://link.springer.com/chapter/10.1007/978-3-319-32699-3_9). Cyber Deception: Building the Scientific Foundation, pp. 203--233, Springer International Publishing, 2016. (See the timeline in particular and honey-patching)
 * https://www.projecthoneypot.org/faq.php
 * Vanderavero, Nicolas & Brouckaert, Xavier & Bonaventure, Olivier & Le Charlier, Baudouin. (2008). [The HoneyTank: A scalable approach to collect malicious internet traffic](https://www.researchgate.net/publication/220592932_The_HoneyTank_A_scalable_approach_to_collect_malicious_internet_traffic). IJCIS. 4. 185-205. 10.1504/IJCIS.2008.016100. 
+
