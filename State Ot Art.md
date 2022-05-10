@@ -67,7 +67,7 @@ Honeypot can behave in 2 different ways when it comes to its interaction [^7]:
 Let's take the example of a honeypot representing a SCADA capable of performing orchestration tasks. In the wastewater treatment plant, 2 possibilities exist, the first is the **client** honeypot connects to servers in order to retrieve its tasks for the day. It will then execute a series of commands and retrieve information which will be analyzed in order to verify that none of these commands is illegal. The second is the reverse role, namely the honeypot **server**, which will provide tasks to its clients. It will also collect information that will be analyzed to verify that no client is trying to execute illegal commands and access unauthorized information.
 
 
-### Distribution 
+### Distributability
 The honeypot distribution is the characteristic that determines the extent to which a honeypot is made up of components located on different systems. This is about the interdependence between these components, and the ability of a honeypot to be self-sufficient.
 * Distributed: The honeypot is made up of several interdependent systems connected with each other. Each component is linked with another and this link is necessary and indispensable. The
 * Stand-Alone: ​​the honeypot is a stand-alone system and is self-sufficient. All the components that constitute it can be connected with each other, but without it being
@@ -119,33 +119,8 @@ In the case of a **production**, its purpose is above all to protect the real sy
 
 ## Strength and weakness of characteristics
 
-|  Characteristic   | Strength                                                          | Weakness                                          |
-|-------------------|---------------------------------------------------------------    |---------------------------------------------------|
-| Low-Interaction   | - Low resource Consumption \\ - Limited risk of compromise        | - Easily detectable \\ - Simulation limit         |
-| High-Interaction  | - Easy to implement \\ - High rate of realism                     | - High risk of comprimise if poorly protected \\ lower scalability due to their complexity  |
-|-------------------|---------------------------------------------------------------    |---------------------------------------------------|
-| Real / Physique   | - Perfectly mimics the behavior of a real system                  | - Cost relative to the reproduced system          |
-| Virtual           | - Low implementation cost \\ - Easily deployable                  | - May lack realism                                |
-| Hybrid            | - Overall cost effective \\ - Meets the need                      |                                                   |
-|-------------------|---------------------------------------------------------------    |---------------------------------------------------|
-| Distributed       |                                                                   |                                                   |
-| Stand-Alone       |                                                                   |                                                   |
-|-------------------|---------------------------------------------------------------    |---------------------------------------------------|
-| Block             |                                                                   |                                                   |
-| Defuse            |                                                                   |                                                   |
-| Slow down         |                                                                   |                                                   |
-| None              |                                                                   |                                                   |
-|-------------------|---------------------------------------------------------------    |---------------------------------------------------|
-| Event             |                                                                   |                                                   |
-| Attacks           |                                                                   |                                                   |
-| Intrusions        |                                                                   |                                                   |
-| None              |                                                                   |                                                   |
-|-------------------|---------------------------------------------------------------    |---------------------------------------------------|
-| Abuse             |                                                                   |                                                   |
-| Anomaly-Alone     |                                                                   |                                                   |
-|-------------------|---------------------------------------------------------------    |---------------------------------------------------|
-| Research          |                                                                   |                                                   |
-| Production        |                                                                   |                                                   |
+![Honeypot Characteristics](/IMAGES/Honeypot-Characteristics-Strength-Weaknes-tab.png)
+[^13]
 
 ## Measures of Effectiveness
 
@@ -289,3 +264,4 @@ https://github.com/telekom-security/tpotce
 * [^10] MITRE CVE (Common Vulnerabilities and Exposures) https://cve.mitre.org/
 * [^11] Ben Lutkevich. (2021). "How to build a honeypot to increase network security"https://www.techtarget.com/searchsecurity/definition/honey-pot
 * [^12] Daniele Antonioli, Anand Agrawal, and Nils Ole Tippenhauer. 2016. Towards High-Interaction Virtual ICS Honeypots-in-a-Box. In Proceedings of the 2nd ACM Workshop on Cyber-Physical Systems Security and Privacy (CPS-SPC '16). Association for Computing Machinery, New York, NY, USA, 13–22. DOI:https://doi.org/10.1145/2994487.2994493
+* [^13] Strength and weakness of characteristics by Abdel-Malek Bouhou https://docs.google.com/spreadsheets/d/e/2PACX-1vQIh2CTBfqDZfc2udGiV6FrjzKUtCasVX8TiVj5VKKvuYEOTsKZUEyHIBR0Yaiqiu7e75yGc7UK4Nni/pubhtml
