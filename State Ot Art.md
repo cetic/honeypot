@@ -74,16 +74,20 @@ Honeypot can behave in 2 different ways when it comes to its interaction [^7]:
 Let's take the example of a honeypot representing a SCADA capable of performing orchestration tasks. In the wastewater treatment plant, 2 possibilities exist, the first is the **client** honeypot connects to servers in order to retrieve its tasks for the day. It will then execute a series of commands and retrieve information which will be analyzed in order to verify that none of these commands is illegal. The second is the reverse role, namely the honeypot **server**, which will provide tasks to its clients. It will also collect information that will be analyzed to verify that no client is trying to execute illegal commands and access unauthorized information.
 
 
-### Distributability
-The honeypot distribution is the characteristic that determines the extent to which a honeypot is made up of components located on different systems. This is about the interdependence between these components, and the ability of a honeypot to be self-sufficient.
-* Distributed: The honeypot is made up of several interdependent systems connected with each other. Each component is linked with another and this link is necessary and indispensable. The
-* Stand-Alone: ​​the honeypot is a stand-alone system and is self-sufficient. All the components that constitute it can be connected with each other, but without it being
+### Topology
+The topology of a honeypot determines its physical, software or logical architecture. It is generally represented with nodes connected to each other and defining a structure[^15]:
 
-To better understand this characteristic, let's take the example given. In the case of the implementation of a **distributed** honeypot, one can imagine that each of the components (SCADA, PLC, RIO, etc.) of the system shown in the diagram is a virtual machine, located on different systems and servers . The logging system is on a component external to the treatment plant, away from access that hackers could gain. Admittedly, the ability to imitate these components is directly linked to their interdependence, but in this case, a subsystem may fail, no longer allowing the functionality of this system to be met, but this will not prevent the honeypot from continue to operate even in a degraded state.
+Centralized: Centralized honeypots use a client/server architecture where one or more client components (client nodes) are directly connected to a central server (central node).
 
-For a **stant-alone** honeypot, certainly the treatment plant is also composed of different services, but the honeypot is self-sufficient and its system is directly made up of intrinsic components. Concretely, the wastewater treatment plant is a single autonomous system, which can be located on a single virtual machine and is not connected with other external components. The logging system is part of the honeypot and is not dependent on any other system. If the system fails, the entire operation of the honeypot becomes out of order.
+Decentralized: Decentralized honeypots also use a client/server architecture, with the difference that the honeypot consists of several servers (central nodes) communicating with each other. These central nodes also communicate with client components (client nodes) which are specific to them.
 
-We can clearly observe a link with the characteristic of the resource level.
+Distributed: Distributed honeypots do not work with a client/server architecture, so there are no client nodes and central nodes (even if some nodes have coordination and arbitration roles). It is a mesh architecture where each node is connected with several other nodes. These nodes work together to form a honeypot.
+
+Within the wastewater treatment plant and to illustrate a **Centralized** topology, one can imagine a virtual honeypot, made up of a virtual machine acting as a central server and containing a RedHat operating system and making it possible to simulate the behavior of a SCADA. Along with this, the central server contains the logging system and can also simulate the behavior of a workstation. The client components (PLCs, RIOs, ...) are on other virtual machines and communicate directly with the central server. Client nodes synchronize with the node and retrieve configuration information (NTP, routines, commands, etc.) or send data for analysis. Concretely, all communications pass through the central nodes, if this were to be out of service, the client nodes would become an orphan, resulting in a total failure of the system, which constitutes a Single point of failure.
+
+To explain the Decentralized honeypot, just take the example above and imagine that we duplicate the virtual honeypot 3 times, while keeping the components and simply modifying their configurations so that they have the appearance to be on another treatment plant site. We get 4 honeypots. Now let's add a connection between these 4 honeypots and a totally independent logging server. The honeypot now has a **Decentralized** topology. Each of the central nodes is completely independent. If one of the nodes were to go out of service, the other central nodes would continue to operate and communicate with each other, causing a partial failure of the system.
+
+The **Distributed** topology of a honeypot can be explained by imagining that a network of honeypots has been created consisting of workstations within the treatment plant. Each workstation is a honeypot in its own right, intended to be compromised and for which we will analyze incoming and outgoing traffic. Each of these workstations is independent and aims to report information. If one of them is compromised, the entire infrastructure continues to operate, without degrading the integrity of the system. This type of honeypot is for example used to counter DDoS attacks [^16].
 
 ### Containment
 The containment strategy defines the ability of a honeypot to defend itself against attacks, other malicious activities spreading from it. A honeypot can use several of these strategies [^1]:
@@ -126,9 +130,8 @@ In the case of a **production**, its purpose is above all to protect the real sy
 ![Honeypot Characteristics](/IMAGES/Honeypot-Characteristics.drawio.png)
 
 ## Strength and weakness of characteristics
-
-![Honeypot Characteristics](/IMAGES/Honeypot-Characteristics-Strength-Weaknes-tab.png)
-[^13]
+it will be uploaded after review and validation.
+Follow the link to view the latest version -> [^13]
 
 ## Measures of Effectiveness
 
@@ -275,3 +278,5 @@ https://github.com/telekom-security/tpotce
 [^12]: Daniele Antonioli, Anand Agrawal, and Nils Ole Tippenhauer. 2016. Towards High-Interaction Virtual ICS Honeypots-in-a-Box. In Proceedings of the 2nd ACM Workshop on Cyber-Physical Systems Security and Privacy (CPS-SPC '16). Association for Computing Machinery, New York, NY, USA, 13–22. DOI:https://doi.org/10.1145/2994487.2994493
 [^13]: Strength and weakness of characteristics by Abdel-Malek Bouhou https://docs.google.com/spreadsheets/d/e/2PACX-1vQIh2CTBfqDZfc2udGiV6FrjzKUtCasVX8TiVj5VKKvuYEOTsKZUEyHIBR0Yaiqiu7e75yGc7UK4Nni/pubhtml
 [^14]: Falliere, N., Murchu, L. O., & Chien, E. (2011). W32. stuxnet dossier. White paper, symantec corp., security response, 5(6), 29. https://pax0r.com/hh/stuxnet/Symantec-Stuxnet-Update-Feb-2011.pdf
+[^15]: "Comparison – Centralized, Decentralized and Distributed Systems"https://docs.google.com/spreadsheets/d/161CdK2RIelx0XPv9ubSTCAu8D_C_jPPSj2D-2Jy2kI8/edit?usp=sharing
+[^16]: Deshpande, Hrishikesh. (2015). HoneyMesh: Preventing Distributed Denial of Service Attacks using Virtualized Honeypots. International Journal of Engineering Research and. V4. 10.17577/IJERTV4IS080325. : https://www.researchgate.net/publication/281144265_HoneyMesh_Preventing_Distributed_Denial_of_Service_Attacks_using_Virtualized_Honeypots
