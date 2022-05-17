@@ -21,6 +21,8 @@ A few clues allow a hacker to identify that he is communicating with a honeypot 
 - The system has very little software installed.
 - The system has a lot of free space on the hard disk, which indicates that it is not a well-used production disk.
 
+
+
 ![Basic Honeypot Example](/IMAGES/honeypot-basic-diagram.png)
 
 ## Characteristics of honeypots 
@@ -71,8 +73,9 @@ Honeypot can behave in 2 different ways when it comes to its interaction [^7]:
 * Server: honeypot acts as a server and passively waits for client requests 
 * Client: honeypot acts as a client and actively initiates requests to servers  
 
-Let's take the example of a honeypot representing a SCADA capable of performing orchestration tasks. In the wastewater treatment plant, 2 possibilities exist, the first is the **client** honeypot connects to servers in order to retrieve its tasks for the day. It will then execute a series of commands and retrieve information which will be analyzed in order to verify that none of these commands is illegal. The second is the reverse role, namely the honeypot **server**, which will provide tasks to its clients. It will also collect information that will be analyzed to verify that no client is trying to execute illegal commands and access unauthorized information.
+In the treatment plant, 2 possibilities exist, the first is that a workstation (the honeypot **client**) connects to a server in order to recover tasks. The client will first attempt to authenticate and then retrieve a task list. All the information answered by the server is collected and analyzed and compared to the expected data in order to determine if the server's answers are correct and therefore if it is legitimate.
 
+The second is the reverse role, namely the honeypot **server**, which will allow clients to connect so that they retrieve lists of commands to be executed. The server honeypot collects authentication information from clients and provides a dummy task list to these clients. Customer activity data is collected and analyzed to verify that no customer attempts to execute illegal commands and access unauthorized information.
 
 ### Topology
 The topology of a honeypot determines its physical, software or logical architecture. It is generally represented with nodes connected to each other and defining a structure[^15]:
@@ -93,7 +96,10 @@ The **Distributed** topology of a honeypot can be explained by imagining that a 
 The containment strategy defines the ability of a honeypot to defend itself against attacks, other malicious activities spreading from it. A honeypot can use several of these strategies [^1]:
 * Block : attacker is identified and blocked, he never reaches his target
 * Defuse : attacker reaches his target, but his attacks are defused; he is manipulated way to fail 
-* Slow down : attacker is slowed down throughout his attacking process, the goal being to discourage him 
+* Slow down: The attacker is slowed down throughout their attack process and the benefits of parallel automated attacks are reduced. He will consume resources and will end up getting discouraged [^17]
+* Disconnected : ? 
+* Imprisoned : ? 
+* Redirect : ? 
 * None : no action is taken to prevent the attacker (Profiling?)   
 
 To illustrate this characteristic, one can imagine that a hacker has entered an HMI of the wastewater treatment plant and tries to modify the position of a valve (actuator). Based on this observation, several reaction strategies are possible. In the case of a **Block**, one can imagine that as soon as the honeypot has detected and identified the pirate, it is automatically blacklisted and the connection is interrupted.
@@ -103,7 +109,7 @@ Finally, if we decide that the honeypot of our treatment plant is intended to st
 
 ### Observability
 This characteristic does not directly concern the technical aspects, but rather its ability to capture types of data [^1]: 
-* Event : an event has occurred -> Status change .
+* Event : an event has occurred -> Status change.
 * Attacks : collects activities threatening the security policy.
 * Intrusions : collects policy-threatening activities that lead to a security breach.
 * None : no data collection.  
@@ -259,9 +265,7 @@ https://github.com/telekom-security/tpotce
 * Sensor : Device for measuring the state of a system and transmitting it to a data acquisition system.
 * Actuator : Device for modifying the state of a system.
 * Human Machine Interface (HMI) : Means and tools implemented so that a human can control and communicate with a machine.
-* Application Programming Interface (API) : Standardized set of classes, methods, functions, and constants that serves as a front through which software provides services to other software through a software library or web service..
-* Stuxnet : 
-
+* Application Programming Interface (API) : Standardized set of classes, methods, functions, and constants that serves as a front through which software provides services to other software through a software library or web service.
 
 ## References
 [^1]: Seifert, C., Welch, I., & Komisarczuk, P. (2006). Taxonomy of honeypots. http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.61.5339
@@ -280,3 +284,4 @@ https://github.com/telekom-security/tpotce
 [^14]: Falliere, N., Murchu, L. O., & Chien, E. (2011). W32. stuxnet dossier. White paper, symantec corp., security response, 5(6), 29. https://pax0r.com/hh/stuxnet/Symantec-Stuxnet-Update-Feb-2011.pdf
 [^15]: "Comparison – Centralized, Decentralized and Distributed Systems"https://docs.google.com/spreadsheets/d/161CdK2RIelx0XPv9ubSTCAu8D_C_jPPSj2D-2Jy2kI8/edit?usp=sharing
 [^16]: Deshpande, Hrishikesh. (2015). HoneyMesh: Preventing Distributed Denial of Service Attacks using Virtualized Honeypots. International Journal of Engineering Research and. V4. 10.17577/IJERTV4IS080325. : https://www.researchgate.net/publication/281144265_HoneyMesh_Preventing_Distributed_Denial_of_Service_Attacks_using_Virtualized_Honeypots
+[^17]: Ponemon Institute, Sponsored by Palo Alto Networks. "Flipping the Economics of Attacks" .2016. https://www.ponemon.org/news-updates/blog/security/flipping-the-economics-of-attacks.html
