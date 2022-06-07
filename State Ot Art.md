@@ -1,7 +1,7 @@
 # State of the art : Honeypots
 
 ## Definition 
-In common parlance, the "honeypot" in the figurative sense of the term, designates a tool used to attract wasps thanks to the smell of honey placed at the bottom of the pot. When the wasp enters it, its legs remain stuck to the honey and the insect is then trapped.
+In common language, the "honeypot" in the figurative sense of the term, designates a tool used to attract wasps thanks to the smell of honey placed at the bottom of the pot. When the wasp enters it, its legs remain stuck to the honey and the insect is then trapped.
 In the IT sense of the term, we must turn to Lance Spitzner [^18] who defines the honeypot as follows: *"A honeypot is an information system resource whose value lies in the unauthorized or illicit use of this resource"*.
 This very general definition induces the notions of bait, lure and surveillance of intruders. 
 
@@ -25,12 +25,8 @@ A few clues allow a hacker to identify that he is communicating with a honeypot 
 - The system has very little software installed.
 - The system has a lot of free space on the hard disk, which indicates that it is not a well-used production disk.
 
-
-
-![Basic Honeypot Example](/IMAGES/honeypot-basic-diagram.png)
-[^18]
-<b> Fig.1 - Basic diagram of an environment using honeypots </b>   
-
+![Basic Honeypot Example](/IMAGES/honeypot-basic-diagram.png)  
+<b> Fig.1 - Basic diagram of an environment using honeypots </b> [^20]  
 
 This figure (Fig.1) shows the extent to which IOT and production environments coexist with honeypots. On the one hand, "IOT"-type connected objects, which are found in everyday life and which are required to make life easier for users. On the other hand, the production environments of companies which allow their legitimate users to connect from the Internet in order to reach corporate resources.
 By trying to access any potentially exploitable resource, attackers will also find themselves faced with honeypots.
@@ -41,18 +37,15 @@ A "database" type honeypot will simulate the behavior of a real database and may
 ## Characteristics of honeypots 
 The honeypots can be classied by means of different orthogonal features [^1]. 
 
-![Honeypot Characteristics](/IMAGES/Honeypot-Characteristics.drawio.png)
-[^19]
-<b> Fig.2 - Diagram of the different characteristics of a honeypot </b>   
+![Honeypot Characteristics](/IMAGES/Honeypot-Characteristics.drawio.png)  
+<b> Fig.2 - Diagram of the different characteristics of a honeypot </b> [^22]   
 
 In order to represent and understand the different characteristics of honeypots, a concrete example is used throughout this section. The example honeypot represents a wastewater treatment plant.
 
 Here is a diagram:
 
-![Basic Honeypot Exemple](/IMAGES/wastewater-treatment-plant-honeypot.png)
-[^20]
-<b> Fig.3 - Diagram of a wastewater treatment plant honeypot </b>   
-
+![Basic Honeypot Exemple](/IMAGES/wastewater-treatment-plant-honeypot.png)  
+<b> Fig.3 - Diagram of a wastewater treatment plant honeypot </b> [^21]  
 
 The context used as the honeypot example represents the infrastructure of the wastewater treatment plant [^12]. Depending on the characteristics and according to the needs, we will consider either a part or the entire infrastructure as being the honeypot.
 It consists of a firewall serving as a gateway to and from the outside. Within the network, we find the elements usually constituting this type of industry. There is a SCADA, the control and data acquisition system, but also a log server, allowing this data to be stored over time. These systems are directly connected to the PLCs. The PLCs make it possible, on the one hand, to recover information from the various sensors (water temperature, flow rates, etc.), and on the other hand, to send orders and commands to the various actuators (valves, bypass , ... ). If some of these components (sensors and actuators) are directly connected to a PLC, others can be located in relatively distant geographical positions. The RIOs (Remote Input/Output) are then used to make the link between the PLC and the components. Finally, all the components are visualized and checked by the engineers and technicians of the Man-Machine Interface. This interface is comparable to a traditional workstation.
@@ -100,11 +93,11 @@ The second is the reverse role, namely the honeypot **server**, which will allow
 ### Topology
 The topology of a honeypot determines its physical, software or logical architecture. It is generally represented with nodes connected to each other and defining a structure[^15]:
 
-Centralized: Centralized honeypots use a client/server architecture where one or more client components (client nodes) are directly connected to a central server (central node).
+* Centralized: Centralized honeypots use a client/server architecture where one or more client components (client nodes) are directly connected to a central server (central node).
 
-Decentralized: Decentralized honeypots also use a client/server architecture, with the difference that the honeypot consists of several servers (central nodes) communicating with each other. These central nodes also communicate with client components (client nodes) which are specific to them.
+* Decentralized: Decentralized honeypots also use a client/server architecture, with the difference that the honeypot consists of several servers (central nodes) communicating with each other. These central nodes also communicate with client components (client nodes) which are specific to them.
 
-Distributed: Distributed honeypots do not work with a client/server architecture, so there are no client nodes and central nodes (even if some nodes have coordination and arbitration roles). It is a mesh architecture where each node is connected with several other nodes. These nodes work together to form a honeypot.
+* Distributed: Distributed honeypots do not work with a client/server architecture, so there are no client nodes and central nodes (even if some nodes have coordination and arbitration roles). It is a mesh architecture where each node is connected with several other nodes. These nodes work together to form a honeypot.
 
 Within the wastewater treatment plant and to illustrate a **Centralized** topology, one can imagine a virtual honeypot, made up of a virtual machine acting as a central server and containing a RedHat operating system and making it possible to simulate the behavior of a SCADA. Along with this, the central server contains the logging system and can also simulate the behavior of a workstation. The client components (PLCs, RIOs, ...) are on other virtual machines and communicate directly with the central server. Client nodes synchronize with the node and retrieve configuration information (NTP, routines, commands, etc.) or send data for analysis. Concretely, all communications pass through the central nodes, if this were to be out of service, the client nodes would become an orphan, resulting in a total failure of the system, which constitutes a Single point of failure.
 
@@ -152,8 +145,8 @@ In the case of a **production**, its purpose is above all to protect the real sy
 
 ## Strength and weakness of characteristics
 
-<b> Fig.4 - Table of strengths and weaknesses of honeypots characteristics </b>   
-it will be uploaded after review and validation.
+<b> Fig.4 - Table of strengths and weaknesses of honeypots characteristics </b> [^19]     
+it will be uploaded after review and validation.  
 Follow the link to view the latest version -> [^13]
 
 ## Measures of Effectiveness
@@ -303,7 +296,7 @@ https://github.com/telekom-security/tpotce
 [^16]: Deshpande, Hrishikesh. (2015). HoneyMesh: Preventing Distributed Denial of Service Attacks using Virtualized Honeypots. International Journal of Engineering Research and. V4. 10.17577/IJERTV4IS080325. : https://www.researchgate.net/publication/281144265_HoneyMesh_Preventing_Distributed_Denial_of_Service_Attacks_using_Virtualized_Honeypots
 [^17]: Ponemon Institute, Sponsored by Palo Alto Networks. "Flipping the Economics of Attacks" .2016. https://www.ponemon.org/news-updates/blog/security/flipping-the-economics-of-attacks.html
 [^18]: L. Spitzner, "Honeypots: catching the insider threat," 19th Annual Computer Security Applications Conference, 2003. Proceedings., 2003, pp. 170-179, doi: 10.1109/CSAC.2003.1254322. : https://ieeexplore.ieee.org/abstract/document/1254322
-[^19]: ( honeypot/IMAGES/Honeypot-Characteristics-Strength-Weaknes-tab.drawio )
-[^20]: ( honeypot/IMAGES/honeypot-basic-diagram.drawio )
-[^21]: ( honeypot/IMAGES/wastewater-treatment-plant-honeypot.drawio )
-[^22]: ( honeypot/IMAGES/Honeypot-Characteristics.drawio.drawio )
+[^19]: honeypot/IMAGES/Honeypot-Characteristics-Strength-Weaknes-tab.drawio
+[^20]: honeypot/IMAGES/honeypot-basic-diagram.drawio
+[^21]: honeypot/IMAGES/wastewater-treatment-plant-honeypot.drawio
+[^22]: honeypot/IMAGES/Honeypot-Characteristics.drawio.drawio
