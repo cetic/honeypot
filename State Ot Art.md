@@ -60,12 +60,12 @@ It consists of a firewall serving as a gateway to and from the outside. Within t
 ### Interaction Level
 The interaction level of the honeypot indicates to what extent its functionality is exposed. Two values are used to define it [^3]:  
 * Low-interaction : honeypot have low level of realism. The interaction between the Hacker and the system is short and limited. It is generally not a system per se, but rather an emulation of operating systems and services. This type of Honeypot  can simulate only specific systems services and uses basic techniques like identifying port scans [^6], generating attack signatures, analyzing trends and collecting malware informations. Low-interaction honeypots are particularly useful for monitoring less complex attacks, such as robots and malwares.
-* High-interaction : The honeypot provides the most realistic environment for attackers because it uses a variety of real services running on real operating systems. It imposes few restrictions inside the system, encouraging attackers to interact with it. High interaction honeypots collect information about all of the attacker's movements and actions, which is an advantage because the information collected is very faithful. Additionally, it makes them more effective at monitoring more experienced hackers, as they look realistic and are likely to deceive them. This characteristic involves risks of compromise, since it goes so far as to allow the attacker to obtain root access, giving him full power over the system.
+* High-interaction : The honeypot provides the most realistic environment for attackers because it uses a variety of real services running on real operating systems. It imposes few restrictions inside the system, encouraging attackers to interact with it. High interaction honeypots collect information about all of the attacker's movements and actions, which is an advantage because the information collected is very faithful. Additionally, it makes them more effective at monitoring more experienced hackers, as they look realistic and are likely to deceive them. This type of honeypot is effective against automated attacks but involves risks of compromise, since it goes so far as to allow the attacker to obtain root access, giving him full power over the system.
 * Medium-interaction : A pot of honey offering a mix between low and high ineraction.
 
-In the case of the proposed example, if the attacker attempts to break into a PLC, he will want to retrieve the list of ports open on it. The **low-interaction** honeypot will then return a list of ports and give status information, but no interaction with those ports will be possible afterwards.
-While the **high-interaction** honeypot allows the attacker to be able to interact with these ports, to connect to them and to modify their states, as a real PLC would do.
-In the case of a **Medium-interaction**, one can imagine that certain ports are simulated by the necessity of their existence on the system, but do not offer the possibility of interaction. While other ports, which are of study interest, are high interaction and give attackers complete freedom.
+In the case of the proposed example, if the attacker tries to break into a PLC, he will want to retrieve the list of TCP ports open on it. The **low interaction** honeypot will then return a list of ports and give information about the status of it. For example, when the attacker wants to try to connect and authenticate on the SSH port of the PLC, the response from the honeypot will be simulated by a script and will send back a defined message. This type of honeypot is effective against automated attacks.
+While the **high interaction** honeypot allows the attacker to be able to interact with open ports and, for example, login via SSH port using low credential. The connected attackers then have free rein and can retrieve information from the sensors or modify the state of the actuators, as a real PLC would do.
+In the case of a **Medium-interaction** honeypot, one can imagine on the one hand, that certain components are "high interaction", for example for the network part and the connection to the PLC via the SSH port, as explained above. On the other hand, components simulated by scripts which are able to return fictitious information from sensors or to simulate the open/closed position of an actuator.
 
 ### Ressource level
 The resource level used by the honeypot is determined by the replication realism of the system. There are three possibilities: 
@@ -117,7 +117,7 @@ The containment strategy defines the ability of a honeypot to defend itself agai
 * Block : attacker is identified and blocked, he never reaches his target
 * Defuse : attacker reaches his target, but his attacks are defused; he is manipulated way to fail 
 * Slow down: The attacker is slowed down throughout their attack process and the benefits of parallel automated attacks are reduced. He will consume resources and will end up getting discouraged [^17]
-* None : no action is taken to prevent the attacker (Profiling?)   
+* None : No action is taken to prevent the attacker, the aim being to study all his actions.
 
 To illustrate this characteristic, one can imagine that a hacker has entered an HMI of the wastewater treatment plant and tries to modify the position of a valve (actuator). Based on this observation, several reaction strategies are possible. In the case of a **Block**, one can imagine that as soon as the honeypot has detected and identified the pirate, it is automatically blacklisted and the connection is interrupted.
 In the case of a **Defuse**, the pirate has already achieved his objective and the command to modify the position of the valve has been sent. From this moment, the honeypot is able to detect unauthorized activity. The attack is defused and the valve has returned to its normal state.
@@ -126,7 +126,7 @@ Finally, if we decide that the honeypot of our treatment plant is intended to st
 
 ### Observability
 This characteristic does not directly concern the technical aspects, but rather its ability to capture types of data [^1]: 
-* Event : an event has occurred -> Status change.
+* Event : collects data related to an abnormal event that has occurred or linked to a change in the state of a system or a component.
 * Attacks : collects activities threatening the security policy.
 * Intrusions : collects policy-threatening activities that lead to a security breach.
 * None : no data collection.  
