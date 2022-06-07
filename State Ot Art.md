@@ -28,19 +28,34 @@ A few clues allow a hacker to identify that he is communicating with a honeypot 
 
 
 ![Basic Honeypot Example](/IMAGES/honeypot-basic-diagram.png)
+[^18]
+<b> Fig.1 - Basic diagram of an environment using honeypots </b>   
+
+
+This figure (Fig.1) shows the extent to which IOT and production environments coexist with honeypots. On the one hand, "IOT"-type connected objects, which are found in everyday life and which are required to make life easier for users. On the other hand, the production environments of companies which allow their legitimate users to connect from the Internet in order to reach corporate resources.
+By trying to access any potentially exploitable resource, attackers will also find themselves faced with honeypots.
+These honeypots, depending on their characteristics, will adopt behaviors to study attackers' strategies, highlight vulnerabilities and protect legitimate systems.
+By honeypot we mean a system capable of reproducing or simulating the behavior of a real component. For example, a honeypot phone will simulate the use of the SIP protocol and allow requests to be sent on port 5060.
+A "database" type honeypot will simulate the behavior of a real database and may even contain decoy data that can be traced later.
 
 ## Characteristics of honeypots 
 The honeypots can be classied by means of different orthogonal features [^1]. 
 
 ![Honeypot Characteristics](/IMAGES/Honeypot-Characteristics.drawio.png)
+[^19]
+<b> Fig.2 - Diagram of the different characteristics of a honeypot </b>   
 
 In order to represent and understand the different characteristics of honeypots, a concrete example is used throughout this section. The example honeypot represents a wastewater treatment plant.
 
 Here is a diagram:
 
 ![Basic Honeypot Exemple](/IMAGES/wastewater-treatment-plant-honeypot.png)
+[^20]
+<b> Fig.3 - Diagram of a wastewater treatment plant honeypot </b>   
 
-This example honeypot represents the infrastructure of the wastewater treatment plant [^12]. It is made of a firewall acting as a gateway to and from the outside. Within the network, we find the elements usually constituting this type of industry. There is a SCADA, the control and data acquisition system, but also a history server, allowing this data to be stored over time. These systems are connected directly to PLCs. PLCs make it possible, on the one hand, to retrieve information from the various sensors (water temperature, flow rates, etc.), and on the other hand, to send orders and commands to the various actuators (valves, bypass, ... ). While some of these components (sensors and actuators) are directly connected to a PLC, others may be located in relatively distant geographical positions. RIOs (Remote Input/Output) are then used to make the link between the PLC and the components. Finally, all the components are visualized and controled by the engineers and technicians from the Humain-Machine Interface. This interface is comparable to a traditional workstation.
+
+The context used as the honeypot example represents the infrastructure of the wastewater treatment plant [^12]. Depending on the characteristics and according to the needs, we will consider either a part or the entire infrastructure as being the honeypot.
+It consists of a firewall serving as a gateway to and from the outside. Within the network, we find the elements usually constituting this type of industry. There is a SCADA, the control and data acquisition system, but also a log server, allowing this data to be stored over time. These systems are directly connected to the PLCs. The automatons make it possible, on the one hand, to recover information from the various sensors (water temperature, flow rates, etc.), and on the other hand, to send orders and commands to the various actuators (valves, bypass , ... ). If some of these components (sensors and actuators) are directly connected to a PLC, others can be located in relatively distant geographical positions. The RIOs (Remote Input/Output) are then used to make the link between the PLC and the components. Finally, all the components are visualized and checked by the engineers and technicians of the Man-Machine Interface. This interface is comparable to a traditional workstation.
 
 ### Interaction Level
 The interaction level of the honeypot indicates to what extent its functionality is exposed. Two values are used to define it [^3]:  
@@ -78,9 +93,9 @@ Honeypot can behave in 2 different ways when it comes to its interaction [^7]:
 * Server: honeypot acts as a server and passively waits for client requests 
 * Client: honeypot acts as a client and actively initiates requests to servers  
 
-In the treatment plant, 2 possibilities exist, the first is that a workstation (the honeypot **client**) connects to a server in order to recover tasks. The client will first attempt to authenticate and then retrieve a task list. All the information answered by the server is collected and analyzed and compared to the expected data in order to determine if the server's answers are correct and therefore if it is legitimate.
+To illustrate the use of a client honeypot, let's imagine that the legitimate workstations of the treatment plant must connect to external resources in order to send water quality analysis data. The implementation of the **client** honeypot consists of the deployment of a robot capable of visiting a list of URLs in order to verify their reliability and legitimacy. The honeypot will send http/https requests to this URL and the responses from the remote servers will be analyzed. Servers containing malware will be considered dangerous and will be listed as such. Thus avoiding a connection from the workstations of the station.
 
-The second is the reverse role, namely the honeypot **server**, which will allow clients to connect so that they retrieve lists of commands to be executed. The server honeypot collects authentication information from clients and provides a dummy task list to these clients. Customer activity data is collected and analyzed to verify that no customer attempts to execute illegal commands and access unauthorized information.
+The second is the reverse role, namely the honeypot **server**, which will allow clients (PLCs, Workstations, control systems) to connect so that they use a service provided by the waiter. Clients will, for example, connect via the SSH protocol to the server in order to send analysis data. The server honeypot will then behave like a legitimate machine and send the corresponding responses to the requests initiated by the clients. Customer activity data is collected and analyzed to verify that no customer attempts to execute illegal commands and access unauthorized information.
 
 ### Topology
 The topology of a honeypot determines its physical, software or logical architecture. It is generally represented with nodes connected to each other and defining a structure[^15]:
@@ -135,9 +150,9 @@ To illustrate this characteristic, one can imagine the existence of a virtual ho
 Its deployment can be carried out within the framework of **research**, we want to highlight the flaws that may exist in the existing system and know how to protect ourselves from attackers.
 In the case of a **production**, its purpose is above all to protect the real system and one does not necessarily seek to collect data for study purposes, but rather to divert the attention of the attacker.
 
-![Honeypot Characteristics](/IMAGES/Honeypot-Characteristics.drawio.png)
-
 ## Strength and weakness of characteristics
+
+<b> Fig.4 - Table of strengths and weaknesses of honeypots characteristics </b>   
 it will be uploaded after review and validation.
 Follow the link to view the latest version -> [^13]
 
@@ -288,3 +303,7 @@ https://github.com/telekom-security/tpotce
 [^16]: Deshpande, Hrishikesh. (2015). HoneyMesh: Preventing Distributed Denial of Service Attacks using Virtualized Honeypots. International Journal of Engineering Research and. V4. 10.17577/IJERTV4IS080325. : https://www.researchgate.net/publication/281144265_HoneyMesh_Preventing_Distributed_Denial_of_Service_Attacks_using_Virtualized_Honeypots
 [^17]: Ponemon Institute, Sponsored by Palo Alto Networks. "Flipping the Economics of Attacks" .2016. https://www.ponemon.org/news-updates/blog/security/flipping-the-economics-of-attacks.html
 [^18]: L. Spitzner, "Honeypots: catching the insider threat," 19th Annual Computer Security Applications Conference, 2003. Proceedings., 2003, pp. 170-179, doi: 10.1109/CSAC.2003.1254322. : https://ieeexplore.ieee.org/abstract/document/1254322
+[^19]: ( honeypot/IMAGES/Honeypot-Characteristics-Strength-Weaknes-tab.drawio )
+[^20]: ( honeypot/IMAGES/honeypot-basic-diagram.drawio )
+[^21]: ( honeypot/IMAGES/wastewater-treatment-plant-honeypot.drawio )
+[^22]: ( honeypot/IMAGES/Honeypot-Characteristics.drawio.drawio )
