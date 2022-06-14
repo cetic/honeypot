@@ -70,16 +70,20 @@ To better understand, let's take the example of the wastewater treatment plant. 
 The **virtual** honeypot is a virtual copy of the wastewater plant. Hosted on a machine capable of virtualizing the layers and services of each component. Virtualization makes it possible to create the 20 PLCs in such a way that they perfectly imitate the behavior of the real components of the wastewater plant. In the case of **hybrid**, one could quite imagine that the network infrastructure is completely virtualized, but that the PLCs are real physical components.
 
 ### Communication interfaces
-The communication interface is the characteristic that defines how the honeypot will be reached and through which interface one will be able to interact with it [^1]. It is important to note that this feature does not define the communication interface of the system on which the honeypot is running, but rather the communication interface of the honeypot: 
-* Network interface: the honeypot communicates directly through a network interface 
-* Non-network hardware interface: the honeypot interfaces with hardware interfaces other than networks (PLC, USB, etc.) 
-* API : the honeypot communicates via a software API  
-It is important to note that a honeypot can allow communication through various interfaces and therefore a honeypot can be assigned multiple values of this characteristic.
+Communication interfaces are the characteristics that define how the honey pot will be reached and through which interface one will be able to interact with it [ 1]. In order to illustrate the different communication interface possibilities of a honeypot, we can use the TCP/IP model as a reference and comparison model.
+Each interface can be considered as a gateway to a system for attackers. The interest of defining the layers in which these interfaces are located makes it possible to specifically categorize honeypot entrance doors. Indeed, attackers can specifically target a protocol or an application and this model allows to have a better overview. A honeypot can have several exposed interfaces and each one belongs to one of these characteristics:
+* Application: layer specifying the applications used by the honeypot and which will be exposed (HTTP, SMTP, SSH, DNS, ...)
+* Transport: layer specifying how end-to-end communications are managed between processes (TCP, UDP, SCTP,...) and possible
+* Network: layer specifying the packet routing method (IP, ICMP, IGMP, IPSec, ...)
+* Network access: layer specifying the physical means (cable, radio, ...) and connection (WiFi, Ethernet, ...) used to communicate with the honeypot.
+* Non-network Hardware Interface: Honey Pot interfaces with Non Network Hardware Interfaces (PLC, USB, etc.).
 
-There are a multitude of possibilities for installing honeypots in a wastewater treatment plant. Suppose it is decided to add a honeypot at the network level (a server, a switch, etc.), then, the honeypot only has a "network interface" as a communication interface, because the receiving end of the network interface is the honeypot itself. It is via this interface that hackers will communicate with it.
-Next, suppose the honeypot is a resource, like a ".csv" file containing decoy data. Although the attacker can access this file over the network (via SSH), the communication interface in this case is not the network, but rather the software API.
-Finally, to illustrate the case of the "non-network hardware interface", one can imagine the installation of a honeypot, in the form of a traditional workstation within the wastewater treatment plant. This honeypot is a computer, allowing the connection of a USB flash drive on a USB port and implemented to determine if a data storage device represents a threat. This type of threat can be compared with Stuxnet [^14].
-Even if the virus spreads through a network interface, the communication interface is not the network, but rather the USB port through which a virus can enter.
+As an example in the treatment plant, we can take the case of a honeypot imitating the behavior of a server providing to clients different resource shares (files and printers) via the SMB (Server Message Block) protocol. The honeypot will receive the "**Application**: protocol SMB" feature as it is the only "exposed" interface by the honeypot. If we decide to expose flaws on other layers of the model,then we can also add these layers by specifying more precisely the protocol or technology used:
+-- **Application**: SMB protocol
+-- **Transport**: TCP protocol
+-- **Network**: IP v4
+-- **Physical**: Cable via Ethernet
+We can also take an example of honeypot disconnected from the network. Let’s imagine that each USB key introduced in the building must be first connected to the honeypot (sandbox) before being used on a legitimate computer. The goal is to verify that the key does not have malware capable of infecting a system and propagating to other systems. In this case, the honetpot will receive the characteristic of **Off-network hardware interface**.
 
 ### Multi-tier architecture 
 Honeypot can behave in 2 different ways when it comes to its interaction [^7]: 
