@@ -1,1 +1,14 @@
-TODO
+# Edge computing : 
+
+To understand edge computing, you have to understand cloud computing.
+
+Cloud computing allows companies to provide IT services via the Internet. Users can benefit from various online services, such as access to software (SaaS), access to platforms (PaaS) or the provision of hardware resources (IaaS). The main purpose of setting up cloud computing in companies is to minimize the costs of IT infrastructure and to be able to adapt its resources according to its needs and the fluctuation of needs.
+
+Edge computing is an optimization concept that consists of processing data and the intelligence of its processing at the periphery of the data source.
+
+--> add schem and 
+
+## Glossary 
+* SaaS : Software As A Service :
+* PaaS : Platform As A Service :
+* IaaS : Infrastructure As A Service :
