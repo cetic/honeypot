@@ -11,6 +11,9 @@ One of the concepts to solve these problems is edge computing[^2]. Edge Computin
 In practical terms, edge computing is an advanced version of cloud computing that reduces latency by bringing services closer to end users. It solves high latency and bottlenecks that are not properly managed in the cloud computing paradigm.
 One of the major differences between edge computing and cloud computing is the location of servers. Edge computing services are located in the Edge network while cloud services are located on the Internet.
 
+There is also the concept of Fog computing which is very similar to Edge computing.
+The major difference is that the Edge computingtends to decentralize processing on devices at the periphery of networks, while Fog computing seeks to distribute processing on local network units using intermediate data aggregation strategies when necessary.
+
 ![Basic Honeypot Exemple](/IMAGES/cloud-fog-edge_infographic.jpg)
 <b> Fig.1 - Industrial IoT data precessing layer stack  </b> [^3]   
 
