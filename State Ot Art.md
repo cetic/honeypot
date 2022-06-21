@@ -70,13 +70,13 @@ To better understand, let's take the example of the wastewater treatment plant. 
 The **virtual** honeypot is a virtual copy of the wastewater plant. Hosted on a machine capable of virtualizing the layers and services of each component. Virtualization makes it possible to create the 20 PLCs in such a way that they perfectly imitate the behavior of the real components of the wastewater plant. In the case of **hybrid**, one could quite imagine that the network infrastructure is completely virtualized, but that the PLCs are real physical components.
 
 ### Communication interfaces
-Communication interfaces are the characteristics that define how the honey pot will be reached and through which interface one will be able to interact with it [ 1]. In order to illustrate the different communication interface possibilities of a honeypot, we can use the TCP/IP model as a reference and comparison model.
+Communication interfaces are the characteristics that define how the honeypot will be reached and through which interface one will be able to interact with it [ 1]. In order to illustrate the different communication interface possibilities of a honeypot, we can use the TCP/IP model as a reference and comparison model.
 Each interface can be considered as a gateway to a system for attackers. The interest of defining the layers in which these interfaces are located makes it possible to specifically categorize honeypot entrance doors. Indeed, attackers can specifically target a protocol or an application and this model allows to have a better overview. A honeypot can have several exposed interfaces and each one belongs to one of these characteristics:
 * Application: layer specifying the applications used by the honeypot and which will be exposed (HTTP, SMTP, SSH, DNS, ...)
 * Transport: layer specifying how end-to-end communications are managed between processes (TCP, UDP, SCTP,...) and possible
 * Network: layer specifying the packet routing method (IP, ICMP, IGMP, IPSec, ...)
 * Network access: layer specifying the physical means (cable, radio, ...) and connection (WiFi, Ethernet, ...) used to communicate with the honeypot.
-* Non-network Hardware Interface: Honey Pot interfaces with Non Network Hardware Interfaces (PLC, USB, etc.).
+* Non-network Hardware Interface: Honeypot interfaces with Non Network Hardware Interfaces (PLC, USB, etc.).
 
 As an example in the treatment plant, we can take the case of a honeypot imitating the behavior of a server providing to clients different resource shares (files and printers) via the SMB (Server Message Block) protocol. The honeypot will receive the "**Application**: protocol SMB" feature as it is the only "exposed" interface by the honeypot. If we decide to expose flaws on other layers of the model,then we can also add these layers by specifying more precisely the protocol or technology used:
 -- **Application**: SMB protocol
@@ -149,9 +149,8 @@ In the case of a **production**, its purpose is above all to protect the real sy
 
 ## Strength and weakness of characteristics
 
+![Basic Honeypot Exemple](/IMAGES/Honeypot-Characteristics-Strength-Weaknes-tab.png)  
 <b> Fig.4 - Table of strengths and weaknesses of honeypots characteristics </b> [^19]     
-it will be uploaded after review and validation.  
-Follow the link to view the latest version -> [^13]
 
 ## Measures of Effectiveness
 
@@ -300,7 +299,7 @@ https://github.com/telekom-security/tpotce
 [^16]: Deshpande, Hrishikesh. (2015). HoneyMesh: Preventing Distributed Denial of Service Attacks using Virtualized Honeypots. International Journal of Engineering Research and. V4. 10.17577/IJERTV4IS080325. : https://www.researchgate.net/publication/281144265_HoneyMesh_Preventing_Distributed_Denial_of_Service_Attacks_using_Virtualized_Honeypots
 [^17]: Ponemon Institute, Sponsored by Palo Alto Networks. "Flipping the Economics of Attacks" .2016. https://www.ponemon.org/news-updates/blog/security/flipping-the-economics-of-attacks.html
 [^18]: L. Spitzner, "Honeypots: catching the insider threat," 19th Annual Computer Security Applications Conference, 2003. Proceedings., 2003, pp. 170-179, doi: 10.1109/CSAC.2003.1254322. : https://ieeexplore.ieee.org/abstract/document/1254322
-[^19]: honeypot/IMAGES/Honeypot-Characteristics-Strength-Weaknes-tab.drawio
-[^20]: honeypot/IMAGES/honeypot-basic-diagram.drawio
-[^21]: honeypot/IMAGES/wastewater-treatment-plant-honeypot.drawio
-[^22]: honeypot/IMAGES/Honeypot-Characteristics.drawio.drawio
+[^19]: honeypot/IMAGES/Honeypot-Characteristics-Strength-Weaknes-tab.drawio , Strength and weakness of characteristics by Abdel-Malek Bouhou https://docs.google.com/spreadsheets/d/e/2PACX-1vQIh2CTBfqDZfc2udGiV6FrjzKUtCasVX8TiVj5VKKvuYEOTsKZUEyHIBR0Yaiqiu7e75yGc7UK4Nni/pubhtml
+[^20]: Basic diagram of an environment using honeypots by Abdel-Malek Bouhou. honeypot/IMAGES/honeypot-basic-diagram.drawio
+[^21]: Diagram of a wastewater treatment plant honeypot by Abdel-Malek Bouhou. honeypot/IMAGES/wastewater-treatment-plant-honeypot.drawio
+[^22]: Diagram of the different characteristics of a honeypot by Abdel-Malek Bouhou. honeypot/IMAGES/Honeypot-Characteristics.drawio.drawio
