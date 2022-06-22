@@ -28,12 +28,15 @@ Other concepts have also been implemented by private companies such as "Open Neb
 ![Basic Honeypot Exemple](/IMAGES/DC-Edge_Continuum.png)
 <b> Fig.2 - Representation of the different concepts related to edge computing  </b> [^4]   
 
-The availability of cloud services on the Internet depends on the distance of multiple jumps between the end user and the cloud servers. The significantly high distance between the mobile device and the cloud server induces high latency in cloud computing compared to low latency in edge computing.
-Beyond performance issues, it is likely that the number of on-road data attacks is higher in cloud computing than in edge computing due to the longer path to servers.
+The availability of cloud services on the Internet depends on the distance of multiple jumps between the end-user and the cloud servers. The significantly high distance between the mobile device and the cloud server induces high latency in cloud computing compared to low latency in edge computing.
 
-However, safety issues are just as important and the use of honeypot can be very useful.
+Beyond performance issues, it is likely that the number of data attacks on the road is higher in cloud computing than in edge computing due to the longer path to servers.
 
----> Add some word about security (https://www.simplilearn.com/edge-computing-security-risk-and-challenges-article#:~:text=New%20edge%20computing%20security%20threats,more%20than%20just%20service%20disruption.)
+However, security issues are just as important in the world of edge computing. Garner predicts that 75% of data created and processed by companies will be done outside of a traditional centralized data centre or cloud by 2025. In other words, the use of edge technologies is on the verge of enormous growth, and this growth is accompanied by new cybersecurity threats.
+
+First, because the extension of peripheral computing exponentially increases the attack surface. Then, because one of the emerging providers aggravates this risk. Unsecured terminals are already used in distributed denial-of-service attacks or as entry points to core networks. [7]
+
+Using honeypot in the different layers that make up edge computing can be a great way to study attackers, their tools, techniques and procedures, and how they would try to circumvent the actual security controls that make up these different layers.
 
 One of the solutions proposed by Stolfo [^5] is to use decoy and honeypot techniques to limit the damage caused by stolen data by reducing the value of this stolen information. They postulate that cloud and edge computing services can be implemented by profiling user behavior and using lures.
 Concretely, the behavior of the user is analyzed and if it turns out abnormal, luring information can be returned by the Cloud and delivered in such a way as to appear completely legitimate and normal. The use of this decoy information makes it possible to detect malicious activity, to create confusion for the attacker who will have to spend resources to distance the real from the false information, creating naturelement a deterrent effect. 
