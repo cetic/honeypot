@@ -1,6 +1,10 @@
 # State of the art : Honeypots
 
 ## Definition 
+In common language, the "honeypot" in the figurative sense of the term, designates a tool used to attract wasps thanks to the smell of honey placed at the bottom of the pot. When the wasp enters it, its legs remain stuck to the honey and the insect is then trapped.
+In the IT sense of the term, we must turn to Lance Spitzner [^18] who defines the honeypot as follows: *"A honeypot is an information system resource whose value lies in the unauthorized or illicit use of this resource"*.
+This very general definition induces the notions of bait, lure and surveillance of intruders. 
+
 In the information technology world, attacks are constant and devices connected to the Internet are constantly scanned by hackers. Their goals are to find valuable data, critical applications and vulnerabilities in network infrastructures. The honeypot is by vocation, an information system, more or less artificial, whose main purpose is to be probed, attacked and possibly compromised in order to make a hacker believe that he has penetrated into the real network of the organization. Thanks to the honeypot, the hacker is removed from the real network and his activities and movements can be captured and monitored. The information collected on the hackers makes it possible to study their methods, their motivations and the attack techniques they use to penetrate or corrupt a system. The goal is to develop ways to improve system security and prevent attacks in the future.
 
 The location of the honeypot largely depends on its sophistication, the traffic it aims to attract, and its proximity to sensitive resources within the organization's network. It can be placed inside the DMZ in the middle of the services (web, mail, ...) intended for the public (internet), on decoy servers. It can also be placed outside the external firewall to detect attempts to enter the internal network. Nevertheless, it will always be better to isolate it from the production environment.
@@ -21,138 +25,134 @@ A few clues allow a hacker to identify that he is communicating with a honeypot 
 - The system has very little software installed.
 - The system has a lot of free space on the hard disk, which indicates that it is not a well-used production disk.
 
-![Basic Honeypot Exemple](/IMAGES/honeypot-basic-diagram.png)
+![Basic Honeypot Example](/IMAGES/honeypot-basic-diagram.png)  
+<b> Fig.1 - Basic diagram of an environment using honeypots </b> [^20]  
+
+This figure (Fig.1) shows the extent to which IOT and production environments coexist with honeypots. On the one hand, "IOT"-type connected objects, which are found in everyday life and which are required to make life easier for users. On the other hand, the production environments of companies which allow their legitimate users to connect from the Internet in order to reach corporate resources.
+By trying to access any potentially exploitable resource, attackers will also find themselves faced with honeypots.
+These honeypots, depending on their characteristics, will adopt behaviors to study attackers' strategies, highlight vulnerabilities and protect legitimate systems.
+By honeypot we mean a system capable of reproducing or simulating the behavior of a real component. For example, a honeypot phone will simulate the use of the SIP protocol and allow requests to be sent on port 5060.
+A "database" type honeypot will simulate the behavior of a real database and may even contain decoy data that can be traced later.
 
 ## Characteristics of honeypots 
 The honeypots can be classied by means of different orthogonal features [^1]. 
+
+![Honeypot Characteristics](/IMAGES/Honeypot-Characteristics.drawio.png)  
+<b> Fig.2 - Diagram of the different characteristics of a honeypot </b> [^22]   
+
 In order to represent and understand the different characteristics of honeypots, a concrete example is used throughout this section. The example honeypot represents a wastewater treatment plant.
 
 Here is a diagram:
 
-![Basic Honeypot Exemple](/IMAGES/wastewater-treatment-plant-honeypot.png)
+![Basic Honeypot Exemple](/IMAGES/wastewater-treatment-plant-honeypot.png)  
+<b> Fig.3 - Diagram of a wastewater treatment plant honeypot </b> [^21]  
 
-This example honeypot represents the infrastructure of the wastewater treatment plant [^12]. It is made up of a firewall acting as a gateway from the outside. Within the network, we find the elements usually constituting this type of industry. There is a SCADA, the control and data acquisition system, but also a history server, allowing this data to be stored over time. These systems are connected directly to PLCs. PLCs make it possible, on the one hand, to retrieve information from the various sensors (water temperature, flow rates, etc.), and on the other hand, to send orders and commands to the various actuators (valves, by -pass, ... ). While some of these components (sensors and actuators) are directly connected to a PLC, others may be located in relatively distant geographical positions. RIOs (Remote Input/Output) are then used to make the link between the PLC and the components. Finally, all the components are consulted and ordered by the engineers and technicians from the man-machine interface. This interface is comparable to a traditional workstation.
-
-
-(TODO--> ADD Schem of wastewater treatment plant)
+The context used as the honeypot example represents the infrastructure of the wastewater treatment plant [^12]. Depending on the characteristics and according to the needs, we will consider either a part or the entire infrastructure as being the honeypot.
+It consists of a firewall serving as a gateway to and from the outside. Within the network, we find the elements usually constituting this type of industry. There is a SCADA, the control and data acquisition system, but also a log server, allowing this data to be stored over time. These systems are directly connected to the PLCs. The PLCs make it possible, on the one hand, to recover information from the various sensors (water temperature, flow rates, etc.), and on the other hand, to send orders and commands to the various actuators (valves, bypass , ... ). If some of these components (sensors and actuators) are directly connected to a PLC, others can be located in relatively distant geographical positions. The RIOs (Remote Input/Output) are then used to make the link between the PLC and the components. Finally, all the components are visualized and checked by the engineers and technicians of the Man-Machine Interface. This interface is comparable to a traditional workstation.
 
 ### Interaction Level
 The interaction level of the honeypot indicates to what extent its functionality is exposed. Two values are used to define it [^3]:  
 * Low-interaction : honeypot have low level of realism. The interaction between the Hacker and the system is short and limited. It is generally not a system per se, but rather an emulation of operating systems and services. This type of Honeypot  can simulate only specific systems services and uses basic techniques like identifying port scans [^6], generating attack signatures, analyzing trends and collecting malware informations. Low-interaction honeypots are particularly useful for monitoring less complex attacks, such as robots and malwares.
-* High-interaction : honeypot provide the most realistic environment for the attackers because it use a variety of real services running on real operating systems. It imposes few restrictions inside the system, encouraging attackers to interact with it. High-interaction honeypots provide are often able to capture detailed information, making them better for monitoring more experienced hackers, as they look realistic and are likely to deceive them. This feature carries risks since it allows the attacker to point to root access, which constitutes a threat of hijacking.
-* Hybride : A pot of honey offering a mix between low and high ineraction.
+* High-interaction : The honeypot provides the most realistic environment for attackers because it uses a variety of real services running on real operating systems. It imposes few restrictions inside the system, encouraging attackers to interact with it. High interaction honeypots collect information about all of the attacker's movements and actions, which is an advantage because the information collected is very faithful. Additionally, it makes them more effective at monitoring more experienced hackers, as they look realistic and are likely to deceive them. This type of honeypot is effective against automated attacks but involves risks of compromise, since it goes so far as to allow the attacker to obtain root access, giving him full power over the system.
+* Medium-interaction : A pot of honey offering a mix between low and high ineraction.
 
-In the case of the example, the low-interaction honeypot presents only a few possibilities of interaction, such as for example access to PLCs capable, in this case, only of giving status information. While the high-interaction, will allow to be able to interact with these PLCs and that the modifications made have an immediate impact on one of the other components of the honeypots, such as the SCADA. In the case of a hybrid, one could imagine a mixture between certain PLCs supposed to interact and others providing only a certain amount of defined information.
+In the case of the proposed example, if the attacker tries to break into a PLC, he will want to retrieve the list of TCP ports open on it. The **low interaction** honeypot will then return a list of ports and give information about the status of it. For example, when the attacker wants to try to connect and authenticate on the SSH port of the PLC, the response from the honeypot will be simulated by a script and will send back a defined message. This type of honeypot is effective against automated attacks.
+While the **high interaction** honeypot allows the attacker to be able to interact with open ports and, for example, login via SSH port using low credential. The connected attackers then have free rein and can retrieve information from the sensors or modify the state of the actuators, as a real PLC would do.
+In the case of a **Medium-interaction** honeypot, one can imagine on the one hand, that certain components are "high interaction", for example for the network part and the connection to the PLC via the SSH port, as explained above. On the other hand, components simulated by scripts which are able to return fictitious information from sensors or to simulate the open/closed position of an actuator.
 
 ### Ressource level
 The resource level used by the honeypot is determined by the replication realism of the system. There are three possibilities: 
-* Real / Physique : is a replication of a target system.
+* Real / Physical : is a replication of a target system.
 * Virtual : use virtualization technology to reproduce a system. This solution is low-cost.
-* Hybrid : include a mixture of real and virtual device. This solution is coste effective  
+* Hybrid : include a mixture of real and virtual device. This solution is cost effective.
 
-To better understand, let's take the example of the wastewater treatment plant. "Physical" would be a carbon copy of a processing wastewater plant in production. Requiring an identical infrastructure at all levels. If the real wastewater plant uses 20 PLCs, the honeypot will use 20 real PLCs. The virtual honeypot is a virtual copy of the wastewater plant. Hosted on a machine capable of virtualizing the layers and services of each component. Virtualization makes it possible to create the 20 PLCs in such a way that they perfectly imitate the behavior of the real components of the wastewater plant. In the case of hybrid, one could quite imagine that the network infrastructure is completely virtualized, but that the PLCs are real physical components.
+To better understand, let's take the example of the wastewater treatment plant. **Physical** would be a carbon copy of a processing wastewater plant in production. Requiring an identical infrastructure at all levels. If the *real* wastewater plant uses 20 PLCs, the honeypot will use 20 real PLCs. One can very easily imagine the difficulty and the costs generated by such a deployment. To provide additional information, if we decided to limit ourselves to the creation of a honeypot consisting essentially of servers, then the so-called "physical" honeypot would be an exact replication of all of these servers.
+The **virtual** honeypot is a virtual copy of the wastewater plant. Hosted on a machine capable of virtualizing the layers and services of each component. Virtualization makes it possible to create the 20 PLCs in such a way that they perfectly imitate the behavior of the real components of the wastewater plant. In the case of **hybrid**, one could quite imagine that the network infrastructure is completely virtualized, but that the PLCs are real physical components.
 
 ### Communication interfaces
-The communication interface is the characteristic that defines how the honeypot will be reached and through which interface one will be able to interact with it [^1]: 
-* Network interface: the honeypot communicates directly through a network interface 
-* Non-network hardware interface: the honeypot interfaces with hardware interfaces other than networks (PLC, USB, etc.) 
-* API : the honeypot communicates via a software API  
+Communication interfaces are the characteristics that define how the honeypot will be reached and through which interface one will be able to interact with it [ 1]. In order to illustrate the different communication interface possibilities of a honeypot, we can use the TCP/IP model as a reference and comparison model.
+Each interface can be considered as a gateway to a system for attackers. The interest of defining the layers in which these interfaces are located makes it possible to specifically categorize honeypot entrance doors. Indeed, attackers can specifically target a protocol or an application and this model allows to have a better overview. A honeypot can have several exposed interfaces and each one belongs to one of these characteristics:
+* Application: layer specifying the applications used by the honeypot and which will be exposed (HTTP, SMTP, SSH, DNS, ...)
+* Transport: layer specifying how end-to-end communications are managed between processes (TCP, UDP, SCTP,...) and possible
+* Network: layer specifying the packet routing method (IP, ICMP, IGMP, IPSec, ...)
+* Network access: layer specifying the physical means (cable, radio, ...) and connection (WiFi, Ethernet, ...) used to communicate with the honeypot.
+* Non-network Hardware Interface: Honeypot interfaces with Non Network Hardware Interfaces (PLC, USB, etc.).
 
-There are a multitude of possibilities for implementing honeypots in a wastewater treatment plant. If it is decided to add a honeypot at the network level (a server, a switch, etc.) in a real wastewater treatment plant, and only at this location, the honeypot only has a "Network interface" as a communication interface. , because it is via this interface that hackers will communicate with. If it is a PLC or a sensor using the RS232 protocol, etc. then the communication interface of the honeypot is a "Non-network hardware interface". Finally, suppose that the honeypot is an API that is used by a real logging server and that it is allowed to return fictitious information, then we are in the case of an "API" interface
+As an example in the treatment plant, we can take the case of a honeypot imitating the behavior of a server providing to clients different resource shares (files and printers) via the SMB (Server Message Block) protocol. The honeypot will receive the "**Application**: protocol SMB" feature as it is the only "exposed" interface by the honeypot. If we decide to expose flaws on other layers of the model,then we can also add these layers by specifying more precisely the protocol or technology used:
+-- **Application**: SMB protocol
+-- **Transport**: TCP protocol
+-- **Network**: IP v4
+-- **Physical**: Cable via Ethernet
+We can also take an example of honeypot disconnected from the network. Let’s imagine that each USB key introduced in the building must be first connected to the honeypot (sandbox) before being used on a legitimate computer. The goal is to verify that the key does not have malware capable of infecting a system and propagating to other systems. In this case, the honetpot will receive the characteristic of **Off-network hardware interface**.
 
 ### Multi-tier architecture 
 Honeypot can behave in 2 different ways when it comes to its interaction [^7]: 
 * Server: honeypot acts as a server and passively waits for client requests 
 * Client: honeypot acts as a client and actively initiates requests to servers  
 
-Let's take the example of a honeypot representing a machine capable of performing orchestration tasks. In the wastewater treatment plant, 2 possibilities exist, the first is the client honeypot connects to servers in order to retrieve its tasks for the day. It will then execute a series of commands and retrieve information which will be analyzed in order to verify that none of these commands is illegal. The second is the reverse role, namely the honeypot server, which will provide tasks to its clients. It will also collect information that will be analyzed to verify that no client is trying to execute illegal commands and access unauthorized information.
+To illustrate the use of a client honeypot, let's imagine that the legitimate workstations of the treatment plant must connect to external resources in order to send water quality analysis data. The implementation of the **client** honeypot consists of the deployment of a robot capable of visiting a list of URLs in order to verify their reliability and legitimacy. The honeypot will send http/https requests to this URL and the responses from the remote servers will be analyzed. Servers containing malware will be considered dangerous and will be listed as such. Thus avoiding a connection from the workstations of the station.
 
-### Distribution (Appearance?)
-The appearance of the honeypot is that it appears to be, or is, composed of a single system, or if it appears to be, or is composed of several independent systems:
-* Distributed : honeypot is or appears to be composed of multiple systems 
-* Stand-Alone : honeypot is or appears to be a system, even if it is composed of several systems but appears to be only one 
+The second is the reverse role, namely the honeypot **server**, which will allow clients (PLCs, Workstations, control systems) to connect so that they use a service provided by the server. Clients will, for example, connect via the SSH protocol to the server in order to send analysis data. The server honeypot will then behave like a legitimate machine and send the corresponding responses to the requests initiated by the clients. Customer activity data is collected and analyzed to verify that no customer attempts to execute illegal commands and access unauthorized information.
 
-* MESH : -> 
-* Centralized : 
+### Topology
+The topology of a honeypot determines its physical, software or logical architecture. It is generally represented with nodes connected to each other and defining a structure[^15]:
+
+* Centralized: Centralized honeypots use a client/server architecture where one or more client components (client nodes) are directly connected to a central server (central node).
+
+* Decentralized: Decentralized honeypots also use a client/server architecture, with the difference that the honeypot consists of several servers (central nodes) communicating with each other. These central nodes also communicate with client components (client nodes) which are specific to them.
+
+* Distributed: Distributed honeypots do not work with a client/server architecture, so there are no client nodes and central nodes (even if some nodes have coordination and arbitration roles). It is a mesh architecture where each node is connected with several other nodes. These nodes work together to form a honeypot.
+
+Within the wastewater treatment plant and to illustrate a **Centralized** topology, one can imagine a virtual honeypot, made up of a virtual machine acting as a central server and containing a RedHat operating system and making it possible to simulate the behavior of a SCADA. Along with this, the central server contains the logging system and can also simulate the behavior of a workstation. The client components (PLCs, RIOs, ...) are on other virtual machines and communicate directly with the central server. Client nodes synchronize with the node and retrieve configuration information (NTP, routines, commands, etc.) or send data for analysis. Concretely, all communications pass through the central nodes, if this were to be out of service, the client nodes would become an orphan, resulting in a total failure of the system, which constitutes a Single point of failure.
+
+To explain the Decentralized honeypot, just take the example above and imagine that we duplicate the virtual honeypot 3 times, while keeping the components and simply modifying their configurations so that they have the appearance to be on another treatment plant site. We get 4 honeypots. Now let's add a connection between these 4 honeypots and a totally independent logging server. The honeypot now has a **Decentralized** topology. Each of the central nodes is completely independent. If one of the nodes were to go out of service, the other central nodes would continue to operate and communicate with each other, causing a partial failure of the system.
+
+The **Distributed** topology of a honeypot can be explained by imagining that a network of honeypots has been created consisting of workstations within the treatment plant. Each workstation is a honeypot in its own right, intended to be compromised and for which we will analyze incoming and outgoing traffic. Each of these workstations is independent and aims to report information. If one of them is compromised, the entire infrastructure continues to operate, without degrading the integrity of the system. This type of honeypot is for example used to counter DDoS attacks [^16].
 
 ### Containment
 The containment strategy defines the ability of a honeypot to defend itself against attacks, other malicious activities spreading from it. A honeypot can use several of these strategies [^1]:
 * Block : attacker is identified and blocked, he never reaches his target
 * Defuse : attacker reaches his target, but his attacks are defused; he is manipulated way to fail 
-* Slow down : attacker is slowed down throughout his attacking process, the goal being to discourage him 
-* None : no action is taken to prevent the attacker (Profiling?)   
+* Slow down: The attacker is slowed down throughout their attack process and the benefits of parallel automated attacks are reduced. He will consume resources and will end up getting discouraged [^17]
+* None : No action is taken to prevent the attacker, the aim being to study all his actions.
 
-To illustrate this characteristic, one can imagine that a hacker has entered a control sub-network of the wastewater treatment plant and tries to modify the position of a valve. From this observation, several reaction strategies are possible. In the case of a "Block", one can imagine that as soon as the honeypot has detected and identified the hacker, it is automatically black listed and the connection is interrupted.
-In the case of a "Defuse", the hacker has already achieved his goal and the command to modify the position of the valve has been sent. From this moment, the honeypot is able to detect unauthorized activity and the attack is defused.
-In the case of a "Slow down", everything is done to slow it down and discourage it. When he thinks he has sent the command to modify the position of the valve, his identity is verified and he is faced with a new pitfall.
-Finally, if we decide that the honeypot of our wastewater treatment plant is intended to study the behavior of the hacker, we can decide to let it act with complete impunity and study its methodology. Then, it can be decided not to apply any containment strategy ("None").  
+To illustrate this characteristic, one can imagine that a hacker has entered an HMI of the wastewater treatment plant and tries to modify the position of a valve (actuator). Based on this observation, several reaction strategies are possible. In the case of a **Block**, one can imagine that as soon as the honeypot has detected and identified the pirate, it is automatically blacklisted and the connection is interrupted.
+In the case of a **Defuse**, the pirate has already achieved his objective and the command to modify the position of the valve has been sent. From this moment, the honeypot is able to detect unauthorized activity. The attack is defused and the valve has returned to its normal state.
+In the case of a **Slow down**, everything is done to slow down and discourage the attacker. When he thinks he has sent the command to modify the position of the valve, another verification is requested, the process is slowed down or does not succeed. Concretely, he is faced with new pitfalls and his objective is never achieved.
+Finally, if we decide that the honeypot of our treatment plant is intended to study the behavior of the hacker, we can decide to let him act with impunity and study his methodology. The attacker can reach his target with or without difficulty, depending on the implementation of the honeypot. In this case, no containment policy (**None**) is applied.
 
 ### Observability
 This characteristic does not directly concern the technical aspects, but rather its ability to capture types of data [^1]: 
-* Event : an event has occurred -> Status change .
+* Event : collects data related to an abnormal event that has occurred or linked to a change in the state of a system or a component.
 * Attacks : collects activities threatening the security policy.
 * Intrusions : collects policy-threatening activities that lead to a security breach.
 * None : no data collection.  
 
-Returning to the example case, if there is an unexpected event capable of being detected by the honeypot, such as the unwanted opening of a valve, then it will receive the "Event" data capture characteristic. . If, on the other hand, the honeypot is able to capture the unsuccessful attempts of a hacker trying to modify the position of the valve, then it will receive the "Attack" data capture characteristic. If the honeypot can capture the events produced by an attack resulting in an intrusion, then it will be decorated with the "intrusions" feature. Finally, if the honeypot is not intended to capture information, as is the case for a decoy intended to imprison hackers to prevent them from acting. They can be assigned the characteristic of "None".
-
-### Detection
-Several mechanisms can be used by the honeypot for the analysis: 
-* Abuse: Data is analyzed and associated with a large database.
-* Anomaly: The networks are analyzed and anomalies are identified. It can be related to traffic load, packets and protocols.  
-
-To give a concrete example of a detection mechanism, one can imagine the implementation of a SCADA within the honeypot of the plant. In the case of an "Abuse", the communication network data is processed and compared in real time by the SCADA which will compare it to an attack signature database and detect if there is a match. In the case of an "Anomaly", The honeypot uses an IDS, which filters the packets circulating on the communication networks and is able to identify the anomalies.
+Returning to the example case, if there is an unexpected event capable of being detected by the honeypot, such as the unwanted opening of a valve, then it will receive the **Event** data capture characteristic. . If, on the other hand, the honeypot is able to capture the unsuccessful attempts of a hacker trying to modify the position of the valve, then it will receive the **Attack** data capture characteristic. If the honeypot can capture the events produced by an attack resulting in an intrusion, then it will be assigned the **intrusions** data capture characteristic. Finally, if the honeypot is not intended to capture information, as is the case for a decoy intended to imprison hackers to prevent them from acting. They can be assigned the characteristic of **None**.
 
 ### Scalability:
 Scalability determines the ability of a honeypot to evolve. By this we mean its ability to be modified in order to increase the number of decoys and services it offers [^3]:
 * Scalable: can increase the number of services and lures offered
 * Not Scalable: Only has a set number of services and cannot be changed at that level.  
 
-Let's take the example of the PLCs present in the structure of the wastewater treatment plant. If PLCs can easily be added, then it is considered scalable. On the other hand, if it is impossible to add more, then it is considered non-scalable.
+Let's take the example of the PLCs present in the structure of the honeypot of the wastewater treatment plant. If PLCs can be added, then the honeypot is considered **scalable**. On the other hand, if it is impossible to add more, then it is considered as **non-scalable**.
 
 ### Context 
 This characteristic is used to define in which context the honeypot is used and what is the purpose of its implementation [^3]:
 * Research : is used to lure attackers and study their behaviours and the tools they use to develop better protection against these attacks.
 * Production : is used to defend and prevent attack on real systems and to protect it.  
+It is important to note that a honeypot can serve both as a means of protection, while collecting data allowing research, therefore, a honeypot can be assigned both values of this characteristic.
 
-To illustrate this characteristic, we can see the wastewater treatment plant processing unit as being a virtual high interaction honeypot identically imitating the behavior of a real central unit. Its deployment can be carried out in the context of research, we want to highlight the flaws that may exist on an existing system and know how to protect ourselves from attackers. In the case of a production, its goal is above all to protect the real system and we do not necessarily seek to collect data for study purposes, but rather to divert the attention of the attacker.
-
-![Honeypot Characteristics](/IMAGES/Honeypot-Characteristics.drawio.png)
+To illustrate this characteristic, one can imagine the existence of a virtual honeypot with high interaction identically imitating the behavior of a real wastewater treatment plant in production.
+Its deployment can be carried out within the framework of **research**, we want to highlight the flaws that may exist in the existing system and know how to protect ourselves from attackers.
+In the case of a **production**, its purpose is above all to protect the real system and one does not necessarily seek to collect data for study purposes, but rather to divert the attention of the attacker.
 
 ## Strength and weakness of characteristics
 
-|  Characteristic   | Strength                                                          | Weakness                                          |
-|-------------------|---------------------------------------------------------------    |---------------------------------------------------|
-| Low-Interaction   | - Low resource Consumption \\ - Limited risk of compromise        | - Easily detectable \\ - Simulation limit         |
-| High-Interaction  | - Easy to implement \\ - High rate of realism                     | - High risk of comprimise if poorly protected \\ lower scalability due to their complexity  |
-|-------------------|---------------------------------------------------------------    |---------------------------------------------------|
-| Real / Physique   | - Perfectly mimics the behavior of a real system                  | - Cost relative to the reproduced system          |
-| Virtual           | - Low implementation cost \\ - Easily deployable                  | - May lack realism                                |
-| Hybrid            | - Overall cost effective \\ - Meets the need                      |                                                   |
-|-------------------|---------------------------------------------------------------    |---------------------------------------------------|
-| Distributed       |                                                                   |                                                   |
-| Stand-Alone       |                                                                   |                                                   |
-|-------------------|---------------------------------------------------------------    |---------------------------------------------------|
-| Block             |                                                                   |                                                   |
-| Defuse            |                                                                   |                                                   |
-| Slow down         |                                                                   |                                                   |
-| None              |                                                                   |                                                   |
-|-------------------|---------------------------------------------------------------    |---------------------------------------------------|
-| Event             |                                                                   |                                                   |
-| Attacks           |                                                                   |                                                   |
-| Intrusions        |                                                                   |                                                   |
-| None              |                                                                   |                                                   |
-|-------------------|---------------------------------------------------------------    |---------------------------------------------------|
-| Abuse             |                                                                   |                                                   |
-| Anomaly-Alone     |                                                                   |                                                   |
-|-------------------|---------------------------------------------------------------    |---------------------------------------------------|
-| Research          |                                                                   |                                                   |
-| Production        |                                                                   |                                                   |
-
-
+![Basic Honeypot Exemple](/IMAGES/Honeypot-Characteristics-Strength-Weaknes-tab.png)  
+<b> Fig.4 - Table of strengths and weaknesses of honeypots characteristics </b> [^19]     
 
 ## Measures of Effectiveness
-
 
 ## Honeynet 
 The capabilities of a single honeypot are limited to its characteristics. Today, many honeypot systems focus on combining different types of honeypot to achieve an optimized solution. 
@@ -272,25 +272,34 @@ https://github.com/telekom-security/tpotce
 * System : Set of elements that make up a pot of honey. A system may consist of several subsystems determining the intrinsic characteristics of the honyepot.
 * CVE : Common Vulnerabilities and Exposures.
 * SCADA : For "Supervisory Control and Data Acquisition". Industrial supervision system that processes a large number of measurements in real time and remotely controls installations.
-* Historian server: Data archiving system designed to collect, store, and retrieve time-based information.
+* Logging server: Data archiving system designed to collect, store, and retrieve time-based information.
 * PLC : Programmable Logic Controllers - Programmable digital electronic device for controlling industrial processes by sequential processing. Exemple : Input cards for connecting sensors, push buttons, actuators, indicators, valves, etc.  
 * Remote Input/Output (RIO) : Remote I/O device for sending or receiving I/O signs from a PLC. (Also call "Distributed Input/Output").
 * Sensor : Device for measuring the state of a system and transmitting it to a data acquisition system.
 * Actuator : Device for modifying the state of a system.
 * Human Machine Interface (HMI) : Means and tools implemented so that a human can control and communicate with a machine.
-
-
+* Application Programming Interface (API) : Standardized set of classes, methods, functions, and constants that serves as a front through which software provides services to other software through a software library or web service.
 
 ## References
-* [^1] Seifert, C., Welch, I., & Komisarczuk, P. (2006). Taxonomy of honeypots. http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.61.5339
-* [^2] Fan, W., Du, Z., & Fernández, D. (2015, November). Taxonomy of honeynet solutions. In 2015 SAI Intelligent Systems Conference (IntelliSys) (pp. 1002-1009). IEEE. https://ieeexplore.ieee.org/abstract/document/7361266/
-* [^3] Franco, J., Aris, A., Canberk, B., & Uluagac, A. S. (2021). A survey of honeypots and honeynets for internet of things, industrial internet of things, and cyber-physical systems. IEEE Communications Surveys & Tutorials, 23(4), 2351-2383. https://ieeexplore.ieee.org/abstract/document/9520645/
-* [^4] Antonioli, Daniele & Agrawal, Anand & Tippenhauer, Nils Ole. (2016). Towards High-Interaction Virtual ICS Honeypots-in-a-Box. 13-22. 10.1145/2994487.2994493. https://dl.acm.org/doi/abs/10.1145/2994487.2994493 
-* [^5] Mairh, Abhishek and Barik, Debabrat and Verma, Kanchan and Jena, Debasish. (2011). Honeypot in Network Security: A Survey. https://dl.acm.org/doi/10.1145/1947940.1948065
-* [^6] Ahn, Seonggwan, Thummin Lee, and Keecheon Kim. "A study on improving security of ICS through honeypot and ARP spoofing." (2019) International Conference on Information and Communication Technology Convergence (ICTC). IEEE, https://ieeexplore.ieee.org/abstract/document/8939925/
-* [^7] Mohammadzadeh, H., Mansoori, M., & Honarbakhsh, R. "Taxonomy of Hybrid Honeypots". (2011). https://www.semanticscholar.org/paper/Taxonomy-of-Hybrid-Honeypots-Mohammadzadeh-Mansoori/711bf1e19078df842f6388869388e9c128cf1024
-[^8] MITRE ATT&CK® https://attack.mitre.org/
-[^9] MITRE ATT&CK® for ICS https://collaborate.mitre.org/attackics/index.php/Main_Page
-[^10] MITRE CVE (Common Vulnerabilities and Exposures) https://cve.mitre.org/
-[^11] Ben Lutkevich. (2021). "How to build a honeypot to increase network security"https://www.techtarget.com/searchsecurity/definition/honey-pot
-[^12] Daniele Antonioli, Anand Agrawal, and Nils Ole Tippenhauer. 2016. Towards High-Interaction Virtual ICS Honeypots-in-a-Box. In Proceedings of the 2nd ACM Workshop on Cyber-Physical Systems Security and Privacy (CPS-SPC '16). Association for Computing Machinery, New York, NY, USA, 13–22. DOI:https://doi.org/10.1145/2994487.2994493
+[^1]: Seifert, C., Welch, I., & Komisarczuk, P. (2006). Taxonomy of honeypots. http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.61.5339
+[^2]: Fan, W., Du, Z., & Fernández, D. (2015, November). Taxonomy of honeynet solutions. In 2015 SAI Intelligent Systems Conference (IntelliSys) (pp. 1002-1009). IEEE. https://ieeexplore.ieee.org/abstract/document/7361266/
+[^3]: Franco, J., Aris, A., Canberk, B., & Uluagac, A. S. (2021). A survey of honeypots and honeynets for internet of things, industrial internet of things, and cyber-physical systems. IEEE Communications Surveys & Tutorials, 23(4), 2351-2383. https://ieeexplore.ieee.org/abstract/document/9520645/
+[^4]: Antonioli, Daniele & Agrawal, Anand & Tippenhauer, Nils Ole. (2016). Towards High-Interaction Virtual ICS Honeypots-in-a-Box. 13-22. 10.1145/2994487.2994493. https://dl.acm.org/doi/abs/10.1145/2994487.2994493 
+[^5]: Mairh, Abhishek and Barik, Debabrat and Verma, Kanchan and Jena, Debasish. (2011). Honeypot in Network Security: A Survey. https://dl.acm.org/doi/10.1145/1947940.1948065
+[^6]: Ahn, Seonggwan, Thummin Lee, and Keecheon Kim. "A study on improving security of ICS through honeypot and ARP spoofing." (2019) International Conference on Information and Communication Technology Convergence (ICTC). IEEE, https://ieeexplore.ieee.org/abstract/document/8939925/
+[^7]: Mohammadzadeh, H., Mansoori, M., & Honarbakhsh, R. "Taxonomy of Hybrid Honeypots". (2011). https://www.semanticscholar.org/paper/Taxonomy-of-Hybrid-Honeypots-Mohammadzadeh-Mansoori/711bf1e19078df842f6388869388e9c128cf1024
+[^8]: MITRE ATT&CK® https://attack.mitre.org/
+[^9]: MITRE ATT&CK® for ICS https://collaborate.mitre.org/attackics/index.php/Main_Page
+[^10]: MITRE CVE (Common Vulnerabilities and Exposures) https://cve.mitre.org/
+[^11]: Ben Lutkevich. (2021). "How to build a honeypot to increase network security"https://www.techtarget.com/searchsecurity/definition/honey-pot
+[^12]: Daniele Antonioli, Anand Agrawal, and Nils Ole Tippenhauer. 2016. Towards High-Interaction Virtual ICS Honeypots-in-a-Box. In Proceedings of the 2nd ACM Workshop on Cyber-Physical Systems Security and Privacy (CPS-SPC '16). Association for Computing Machinery, New York, NY, USA, 13–22. DOI:https://doi.org/10.1145/2994487.2994493
+[^13]: Strength and weakness of characteristics by Abdel-Malek Bouhou https://docs.google.com/spreadsheets/d/e/2PACX-1vQIh2CTBfqDZfc2udGiV6FrjzKUtCasVX8TiVj5VKKvuYEOTsKZUEyHIBR0Yaiqiu7e75yGc7UK4Nni/pubhtml
+[^14]: Falliere, N., Murchu, L. O., & Chien, E. (2011). W32. stuxnet dossier. White paper, symantec corp., security response, 5(6), 29. https://pax0r.com/hh/stuxnet/Symantec-Stuxnet-Update-Feb-2011.pdf
+[^15]: "Comparison – Centralized, Decentralized and Distributed Systems"https://docs.google.com/spreadsheets/d/161CdK2RIelx0XPv9ubSTCAu8D_C_jPPSj2D-2Jy2kI8/edit?usp=sharing
+[^16]: Deshpande, Hrishikesh. (2015). HoneyMesh: Preventing Distributed Denial of Service Attacks using Virtualized Honeypots. International Journal of Engineering Research and. V4. 10.17577/IJERTV4IS080325. : https://www.researchgate.net/publication/281144265_HoneyMesh_Preventing_Distributed_Denial_of_Service_Attacks_using_Virtualized_Honeypots
+[^17]: Ponemon Institute, Sponsored by Palo Alto Networks. "Flipping the Economics of Attacks" .2016. https://www.ponemon.org/news-updates/blog/security/flipping-the-economics-of-attacks.html
+[^18]: L. Spitzner, "Honeypots: catching the insider threat," 19th Annual Computer Security Applications Conference, 2003. Proceedings., 2003, pp. 170-179, doi: 10.1109/CSAC.2003.1254322. : https://ieeexplore.ieee.org/abstract/document/1254322
+[^19]: honeypot/IMAGES/Honeypot-Characteristics-Strength-Weaknes-tab.drawio , Strength and weakness of characteristics by Abdel-Malek Bouhou https://docs.google.com/spreadsheets/d/e/2PACX-1vQIh2CTBfqDZfc2udGiV6FrjzKUtCasVX8TiVj5VKKvuYEOTsKZUEyHIBR0Yaiqiu7e75yGc7UK4Nni/pubhtml
+[^20]: Basic diagram of an environment using honeypots by Abdel-Malek Bouhou. honeypot/IMAGES/honeypot-basic-diagram.drawio
+[^21]: Diagram of a wastewater treatment plant honeypot by Abdel-Malek Bouhou. honeypot/IMAGES/wastewater-treatment-plant-honeypot.drawio
+[^22]: Diagram of the different characteristics of a honeypot by Abdel-Malek Bouhou. honeypot/IMAGES/Honeypot-Characteristics.drawio.drawio
