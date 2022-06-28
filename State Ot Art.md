@@ -152,23 +152,6 @@ In the case of a **production**, its purpose is above all to protect the real sy
 ![Basic Honeypot Exemple](/IMAGES/Honeypot-Characteristics-Strength-Weaknes-tab.png)  
 <b> Fig.4 - Table of strengths and weaknesses of honeypots characteristics </b> [^19]     
 
-## Measures of Effectiveness
-
-## Honeynet 
-The capabilities of a single honeypot are limited to its characteristics. Today, many honeypot systems focus on combining different types of honeypot to achieve an optimized solution. 
-A honeynet is an extension of the honeypot concept respecting a certain topology. 
-
-In his article, Wenjun's Fan [^2] proposes a honey network taxonomy that facilitates their classification and study. 
-It is composed of 3 main features:
-Data control: Set of measures aimed at reducing the risk that a honeypot will be compromised and used to attack other systems. Outbound attacks must be controlled to protect non-honeypot systems
-
-Data capture: Its purpose is to capture and record and collect the activities of attackers in order to be exploited later. 3 critical data capture layers have been identified:
-* The layer related to incoming and outgoing connections stored in the firewall logs.
-* The traffic analysis layer, which checks packets and their payloads as they enter and leave the honeynet.
-* The layer related to activity on the system (system calls, modified files, attacker's keystroke, etc).
-
-Data collection: Means necessary and used to guarantee the safe transfer of data collected by honeypots to a centralized point.
-
 ## Type of attacks 
 
 In order to study the behavior of attackers, it is necessary to make sure that they do not reach the legitimate resources, but the honeypot.
@@ -199,10 +182,54 @@ MITRE CVE [^9] is a public dictionary that records all vulnerabilities and secur
 The use of these 2 sources of information by a honeypot can be interesting insofar as they provide interesting techniques to feed the attacker's killchain. 
 
 ### Categorization of threats
+As part of their research, Ryandy and Lim [^23] argues that data collected by honeypot can be processed and analyzed, using algorithms to correlate with Mitre’s threat scheme to finally categorize the various threats. They installed two well-known honeypots, namely Crowie and Dionaea. Over a two-month period in 2020, they were able to observe 547 million attacks. Of these attacks, only 1% were successful in logging in and executing commands or delivering a payload. Nevertheless, 96.1% were able to connect without executing any commands. They concluded that attackers spend most of their time scanning ports rather than trying to exploit the system. 
 
+It is interesting to note that they were able to observe a much higher number of attacks during working days than during the weekend. He suggests that this is a strong indicator that source IP addresses would come from desktop computers used as bots. 
+
+These two honeypots emulate a long service list, namely FTP, SMB, EpMapper, HTTP, Memcache, MQTT, MSSQL, MYSQL, PPTP, SIP, TFTP, UPNP.
+Analysis of the data allowed them to define a taxonomy of threats that are covered by these honeypot. Once correlated with Mitre, they were able to summarize in a table the categories of attacks with the number of occurrences:
+
+![Basic Honeypot Exemple](/IMAGES/Threats-Statistics.PNG)  
+<b> Fig.5 - Threat Categorization & Frequency Statistics </b> [^23]     
+
+In the case of Cowrie, more focused on artifacts, networks, the categorization of these threats could be done through the recovery of the various commands entered by the attackers: 
+![Basic Honeypot Exemple](/IMAGES/Command-Categorization.PNG)  
+<b> Fig.6 - Cowrie command & MITRE categorization </b> [^23]     
+
+When combined with the Mitre technique, these commands highlighted three categories of attacks, namely:
+* SCS005 (System Profiling & Persistence)
+* SCS029 (System Profiling)
+* SCS007 (Shell, Tool Exec. & System Profiling)
+
+In the case of Dionaea, more focused on payload artifacts, they were able to observe the use of malware of which here are the top 7:
+* TrojanDownloader : Win32/Small (183)
+* Ransom : Win32/CVE-2017-0147.A (121)
+* TrojanDownloader : Win32/ZombieBoy.A!bit (16)
+* Trojan : Win32/Occamy.CBO (12)
+* Trojan : Win32/Tiggre!r.fn (8)
+* Ransom : Win32/WannaCrypt.A!rsm (6)
+* Trojan : Win32/Eqtonex.F!rfn (2)
+
+They found that most of the malware encountered is ransoms or trojans/ TrojanDownloader. 
+
+## Measures of Effectiveness
+
+## Honeynet 
+The capabilities of a single honeypot are limited to its characteristics. Today, many honeypot systems focus on combining different types of honeypot to achieve an optimized solution. 
+A honeynet is an extension of the honeypot concept respecting a certain topology. 
+
+In his article, Wenjun's Fan [^2] proposes a honey network taxonomy that facilitates their classification and study. 
+It is composed of 3 main features:
+Data control: Set of measures aimed at reducing the risk that a honeypot will be compromised and used to attack other systems. Outbound attacks must be controlled to protect non-honeypot systems
+
+Data capture: Its purpose is to capture and record and collect the activities of attackers in order to be exploited later. 3 critical data capture layers have been identified:
+* The layer related to incoming and outgoing connections stored in the firewall logs.
+* The traffic analysis layer, which checks packets and their payloads as they enter and leave the honeynet.
+* The layer related to activity on the system (system calls, modified files, attacker's keystroke, etc).
+
+Data collection: Means necessary and used to guarantee the safe transfer of data collected by honeypots to a centralized point.
 
 ## Honeypot solutions referances
-reference in terms of honeypot in the private and open-source market
 
 ### Open-Source Honeypots solution -> 
 
@@ -231,11 +258,7 @@ https://github.com/telekom-security/tpotce
     - kako : https://github.com/darkarnium/kako  
     The default config will run a number of service simulations in order to capture attacking information from all incoming requests, including the full body. It includes Telnet, HTTP and HTTPS servers. Kako requires the following Python packages to work properly: Click, Boto3, Requests and Cerberus. Once you’re covered with the required packages, you can configure this IOT honeypot by using a simple YAML file called kako.yaml. All the data is recorded and is exported into AWS SNS, and flat-file JSON format.    
 
-
-
 # Honeypot and DevSecOps 
-
-## DevSecOps 
 
 ## Criteria for selecting a honeypot
 ### Definition of a strategy:
@@ -265,17 +288,6 @@ https://github.com/telekom-security/tpotce
 - Configure the honeypot according to the strategy (port, service, application, vulnerabilities, link with logging ...)
 - Test the honeypot
 - Going live
-
-
-
-
-
-
-## Concepts
-
-* honeyfarm
-* honey-patching
-* honey-trapping
 
 ## Glossary 
 * IoT : Internet of Things.
@@ -319,3 +331,4 @@ https://github.com/telekom-security/tpotce
 [^21]: Diagram of a wastewater treatment plant honeypot by Abdel-Malek Bouhou. honeypot/IMAGES/wastewater-treatment-plant-honeypot.drawio
 [^22]: Diagram of the different characteristics of a honeypot by Abdel-Malek Bouhou. honeypot/IMAGES/Honeypot-Characteristics.drawio.drawio
 [^23]: Ryandy, Charles Lim, and Kalpin Erlangga Silaen. 2020. XT-Pot: eXposing Threat Category of Honeypot-based attacks. In Proceedings of the International Conference on Engineering and Information Technology for Sustainable Industry (ICONETSI). Association for Computing Machinery, New York, NY, USA, Article 31, 1–6. https://doi.org/10.1145/3429789.3429868
+[^24]: Pa, Y. M. P., Suzuki, S., Yoshioka, K., Matsumoto, T., Kasama, T., & Rossow, C. (2016). IoTPOT: A Novel Honeypot for Revealing Current IoT Threats. Journal of Information Processing, 24(3), 522–533. doi:10.2197/ipsjjip.24.522 
