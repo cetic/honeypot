@@ -152,6 +152,66 @@ In the case of a **production**, its purpose is above all to protect the real sy
 ![Basic Honeypot Exemple](/IMAGES/Honeypot-Characteristics-Strength-Weaknes-tab.png)  
 <b> Fig.4 - Table of strengths and weaknesses of honeypots characteristics </b> [^19]     
 
+## Type of attacks 
+
+In order to study the behavior of attackers, it is necessary to make sure that they do not reach the legitimate resources, but the honeypot.
+The honeypot is placed in a specific IP address range and isolated from the company’s resources.
+All attempts to connect to the honeypot are considered malicious. The honeypot provides services such as SMB, HTTP, SSH, FTP, TFTP, MySQL, MSSQL, SIP, etc, depending on the characteristics defined above.
+Once the attackers' activities have been collected, this information must be processed in order to dissect the threats and possible ramifications of the attacks.
+This collected information can be attack sequences, commands, scripts and any other malicious payloads. They generate information on threats and thus enrich the organization’s risk analyses in order to mitigate those risks.
+
+### Threat Analysis
+Ryandy and Lim [^23] propose a first threat analysis cut into 2 categories of artifacts. Network traffic artifacts and payload artifacts.
+
+Network traffic artifacts are key attack information that can be linked to a domain name, an IP address, a URL, and their relationship. Some of these artifacts can be identified as compromise indicators (IOC) and can then be used for early detection of attack attempts using intrusion detection systems and antivirus software.
+This key attack information can be linked to a particular service. For example, the ssh service often starts with an authentication process and continues with sending a command or instruction that may involve using a URL to download a load used in order to exploit the host. In this case, the URL is an indicator of compromise and allows to highlight the importance of network services in the identification of the attacker, his intentions and his behavior.
+
+Payload artifacts are parts of a program or malware used to perform various malicious activities in order to achieve the attacker’s objectives. These artifacts can be analyzed in 2 different ways. Or statically, by quickly analyzing the file structure of a program without executing it. The binary code is analyzed to determine if the signature is known and if it is malware. Be dynamically, running the code in a sandbox to discover the behavior of the program at execution.
+
+All of these artifacts provide an easy-to-share knowledge base for cybersecurity organizations. One of the best known is Mitre.
+
+### Mitre 
+MITRE is an American non-profit organization whose objective is to work for the public interest. His fields of intervention are systems engineering, information technology, operational concepts, and business modernization. Their slogan is that they solve problems for a safer world.  
+MITRE has become a reference in terms of sharing information around cybercrime and its 2 essential platforms are MITRE ATT&CK® and MITRE CVE.  
+MITRE ATT&CK® [^8]is an open and freely accessible reference knowledge base, known in the world of computer security, as it provides a list of tactics and techniques used by cybercriminals. It describes the adversary behaviors specific to the different environments (Windows, Linux, Mac, cloud, mobiles, etc.) through different phases: 
+Reconnaissance, resource development, initial access, execution, persistence, privilege escalation, defense evasion, credential access, discovery, lateral Movement, collection, command and control, exfiltration and impact. 
+Organizations tap into this knowledge base to develop offensive and defensive measures to strengthen their security. ATT&CK® can help cyber defense managers better understand attacker behavior and assess risk to a society by classifying attacks. There is even a knowledge base dedicated to Industrial Control Systems, ATT&CK® ICS [^10].    
+
+MITRE CVE [^9] is a public dictionary that records all vulnerabilities and security flaws that have been discovered. CVE identifiers are notably used by IDSs and IPSs.
+
+The use of these 2 sources of information by a honeypot can be interesting insofar as they provide interesting techniques to feed the attacker's killchain. 
+
+### Categorization of threats
+As part of their research, Ryandy and Lim [^23] argues that data collected by honeypot can be processed and analyzed, using algorithms to correlate with Mitre’s threat scheme to finally categorize the various threats. They installed two well-known honeypots, namely Crowie and Dionaea. Over a two-month period in 2020, they were able to observe 547 million attacks. Of these attacks, only 1% were successful in logging in and executing commands or delivering a payload. Nevertheless, 96.1% were able to connect without executing any commands. They concluded that attackers spend most of their time scanning ports rather than trying to exploit the system. 
+
+It is interesting to note that they were able to observe a much higher number of attacks during working days than during the weekend. He suggests that this is a strong indicator that source IP addresses would come from desktop computers used as bots. 
+
+These two honeypots emulate a long service list, namely FTP, SMB, EpMapper, HTTP, Memcache, MQTT, MSSQL, MYSQL, PPTP, SIP, TFTP, UPNP.
+Analysis of the data allowed them to define a taxonomy of threats that are covered by these honeypot. Once correlated with Mitre, they were able to summarize in a table the categories of attacks with the number of occurrences:
+
+![Basic Honeypot Exemple](/IMAGES/Threats-Statistics.PNG)  
+<b> Fig.5 - Threat Categorization & Frequency Statistics </b> [^23]     
+
+In the case of Cowrie, more focused on artifacts, networks, the categorization of these threats could be done through the recovery of the various commands entered by the attackers: 
+![Basic Honeypot Exemple](/IMAGES/Command-Categorization.PNG)  
+<b> Fig.6 - Cowrie command & MITRE categorization </b> [^23]     
+
+When combined with the Mitre technique, these commands highlighted three categories of attacks, namely:
+* SCS005 (System Profiling & Persistence)
+* SCS029 (System Profiling)
+* SCS007 (Shell, Tool Exec. & System Profiling)
+
+In the case of Dionaea, more focused on payload artifacts, they were able to observe the use of malware of which here are the top 7:
+* TrojanDownloader : Win32/Small (183)
+* Ransom : Win32/CVE-2017-0147.A (121)
+* TrojanDownloader : Win32/ZombieBoy.A!bit (16)
+* Trojan : Win32/Occamy.CBO (12)
+* Trojan : Win32/Tiggre!r.fn (8)
+* Ransom : Win32/WannaCrypt.A!rsm (6)
+* Trojan : Win32/Eqtonex.F!rfn (2)
+
+They found that most of the malware encountered is ransoms or trojans/ TrojanDownloader. 
+
 ## Measures of Effectiveness
 
 ## Honeynet 
@@ -169,26 +229,7 @@ Data capture: Its purpose is to capture and record and collect the activities of
 
 Data collection: Means necessary and used to guarantee the safe transfer of data collected by honeypots to a centralized point.
 
-## Type of attacks 
-
-### Mitre 
-MITRE is an American non-profit organization whose objective is to work for the public interest. His fields of intervention are systems engineering, information technology, operational concepts, and business modernization. Their slogan is that they solve problems for a safer world.  
-MITRE has become a reference in terms of sharing information around cybercrime and its 2 essential platforms are MITRE ATT&CK® and MITRE CVE.  
-MITRE ATT&CK® [^8]is an open and freely accessible reference knowledge base, known in the world of computer security, as it provides a list of tactics and techniques used by cybercriminals. It describes the adversary behaviors specific to the different environments (Windows, Linux, Mac, cloud, mobiles, etc.). Organizations tap into this knowledge base to develop offensive and defensive measures to strengthen their security. ATT&CK® can help cyber defense managers better understand attacker behavior and assess risk to a society by classifying attacks. There is even a knowledge base dedicated to Industrial Control Systems, ATT&CK® ICS [^10].    
-
-MITRE CVE [^9] is a public dictionary that records all vulnerabilities and security flaws that have been discovered. CVE identifiers are notably used by IDSs and IPSs.
-
-The use of these 2 sources of information by a honeypot can be interesting insofar as they provide interesting techniques to feed the attacker's killchain. 
-TODO->
-
-*Usage of Mitre (Honeypot dapted to certain threats) ? 
-
-
-###  Lockheed-Martin Killchain
-*confront MITRE
-
 ## Honeypot solutions referances
-reference in terms of honeypot in the private and open-source market
 
 ### Open-Source Honeypots solution -> 
 
@@ -217,11 +258,7 @@ https://github.com/telekom-security/tpotce
     - kako : https://github.com/darkarnium/kako  
     The default config will run a number of service simulations in order to capture attacking information from all incoming requests, including the full body. It includes Telnet, HTTP and HTTPS servers. Kako requires the following Python packages to work properly: Click, Boto3, Requests and Cerberus. Once you’re covered with the required packages, you can configure this IOT honeypot by using a simple YAML file called kako.yaml. All the data is recorded and is exported into AWS SNS, and flat-file JSON format.    
 
-
-
 # Honeypot and DevSecOps 
-
-## DevSecOps 
 
 ## Criteria for selecting a honeypot
 ### Definition of a strategy:
@@ -252,17 +289,6 @@ https://github.com/telekom-security/tpotce
 - Test the honeypot
 - Going live
 
-
-
-
-
-
-## Concepts
-
-* honeyfarm
-* honey-patching
-* honey-trapping
-
 ## Glossary 
 * IoT : Internet of Things.
 * IIoT : Industrial Internet of Things.
@@ -279,6 +305,7 @@ https://github.com/telekom-security/tpotce
 * Actuator : Device for modifying the state of a system.
 * Human Machine Interface (HMI) : Means and tools implemented so that a human can control and communicate with a machine.
 * Application Programming Interface (API) : Standardized set of classes, methods, functions, and constants that serves as a front through which software provides services to other software through a software library or web service.
+* IOC : artifact observed on a network or in an operating system that indicates with a high level of certainty that a computer intrusion has taken place or has occurred.
 
 ## References
 [^1]: Seifert, C., Welch, I., & Komisarczuk, P. (2006). Taxonomy of honeypots. http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.61.5339
@@ -303,3 +330,5 @@ https://github.com/telekom-security/tpotce
 [^20]: Basic diagram of an environment using honeypots by Abdel-Malek Bouhou. honeypot/IMAGES/honeypot-basic-diagram.drawio
 [^21]: Diagram of a wastewater treatment plant honeypot by Abdel-Malek Bouhou. honeypot/IMAGES/wastewater-treatment-plant-honeypot.drawio
 [^22]: Diagram of the different characteristics of a honeypot by Abdel-Malek Bouhou. honeypot/IMAGES/Honeypot-Characteristics.drawio.drawio
+[^23]: Ryandy, Charles Lim, and Kalpin Erlangga Silaen. 2020. XT-Pot: eXposing Threat Category of Honeypot-based attacks. In Proceedings of the International Conference on Engineering and Information Technology for Sustainable Industry (ICONETSI). Association for Computing Machinery, New York, NY, USA, Article 31, 1–6. https://doi.org/10.1145/3429789.3429868
+[^24]: Pa, Y. M. P., Suzuki, S., Yoshioka, K., Matsumoto, T., Kasama, T., & Rossow, C. (2016). IoTPOT: A Novel Honeypot for Revealing Current IoT Threats. Journal of Information Processing, 24(3), 522–533. doi:10.2197/ipsjjip.24.522 
