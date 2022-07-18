@@ -53,4 +53,4 @@ SOAR : Security Orchestration, Automation and Response
 [^1]: A. Pathak (2022). Dive into the different phases of the DevOps lifecycle. https://geekflare.com/fr/devops-lifecycle/  
 [^2]: S. Dupont, G.Ginis (2021). https://github.com/cetic/devsecops/blob/master/devsecops.svg  
 [^3]: H. Benchrifa (2021). OPERATE - Penetration testing and SOAR. https://github.com/cetic/devsecops/blob/master/SOAR/Operate.md  
-[^4]: Continuous security within DevSecOps ( )https://snyk.io/learn/what-is-ci-cd-pipeline-and-tools-explained/continuous-security/
+[^4]: Continuous security within DevSecOps. https://snyk.io/learn/what-is-ci-cd-pipeline-and-tools-explained/continuous-security/
